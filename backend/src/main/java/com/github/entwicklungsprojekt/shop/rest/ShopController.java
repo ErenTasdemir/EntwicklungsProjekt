@@ -2,7 +2,9 @@ package com.github.entwicklungsprojekt.shop.rest;
 
 import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
 import com.github.entwicklungsprojekt.shop.service.ShopService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +18,12 @@ public class ShopController {
 
     private final ShopService shopService;
 
-    private final HibernateSearchService shopSearchService;
+    private final ProjectionFactory projectionFactory;
 
-    public ShopController(ShopService shopService, @Qualifier("shopSearchService") HibernateSearchService shopSearchService) {
+    @Autowired
+    public ShopController(ShopService shopService, @Qualifier("shopSearchService") HibernateSearchService shopSearchService, ProjectionFactory projectionFactory) {
         this.shopService = shopService;
-        this.shopSearchService = shopSearchService;
+        this.projectionFactory = projectionFactory;
     }
 
     @GetMapping
@@ -30,7 +33,7 @@ public class ShopController {
 
     @GetMapping(path = "/search")
     ResponseEntity<?> searchShops(@RequestParam(name = "query") String query) {
-        return ResponseEntity.ok(shopSearchService.searchShops(query));
+        return ResponseEntity.ok(shopService.searchShops(query));
     }
 
 
