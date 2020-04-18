@@ -1,0 +1,26 @@
+<div class="site-content">
+  <p></p>
+  <h3>Hier können Sie nach Shops suchen!</h3>
+  <hr>
+  <p></p>
+
+  <div class="table">
+    <div class="table-content">
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Branche</th>
+          <th>Ort</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shop of shops">
+            <td class="text-capitalize">{{replaceUmlaute(shop.shopName)}}</td>
+            <td class="text-capitalize">{{replaceUmlaute(shop.shopType)}}</td>
+            <td class="text-capitalize text-">{{replaceUmlaute(shop.shopLocation)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

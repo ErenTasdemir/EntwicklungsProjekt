@@ -1,0 +1,23 @@
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+table {
+  width: 100%;
+}
+.mat-table {
+  background: whitesmoke;
+}
+ .mat-header-cell{
+   color: black;
+   font-size: 1.5em;
+ }
+.mat-cell {
+  color: black;
+}
+
+.form-control-range {
+  width: 30%;
+  display: block;
+}
+
