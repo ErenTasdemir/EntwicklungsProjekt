@@ -1,5 +1,6 @@
 package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
+import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.openstreetmap_location.repository.OpenstreetmapLocationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +60,10 @@ public class OpenstreetmapLocationService {
 
     public void saveLocation(OpenstreetmapLocation openstreetmapLocation) {
         openstreetmapLocationRepository.save(openstreetmapLocation);
+    }
+
+    public List<Long> getShopIdsInRadius(GeoData geoData , int radius) {
+        return openstreetmapLocationRepository.findAllByRadius(geoData.getLatitude() , geoData.getLongitude() , radius);
     }
 
     public List<String> matchShopLocationWithOsmLocationCsv(String shopLocation) {
