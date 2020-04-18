@@ -1,0 +1,14 @@
+.button {
+  margin-left: auto;
+}
+.navbar {
+  padding: 1.5em 2em;
+  background-color: blanchedalmond;
+
+}
+.navbar a{
+  padding: 0.5em 0.5em;
+  color: green;
+  margin: 0.5em 0.5em;
+}
+
