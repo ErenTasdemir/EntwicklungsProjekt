@@ -1,36 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import {combineLatest, Subject} from 'rxjs';
+import {Shop, ShopService} from '../_services/shop.service';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  providers: [ShopService]
 })
 export class SearchComponent implements OnInit {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource: PeriodicElement[];
-  constructor() { }
+  shops: Shop[] = [];
 
-  ngOnInit(): void {
-    this.dataSource = ELEMENT_DATA;
+  destroy$ = new Subject<void>();
+
+  constructor(private shopService: ShopService,
+              private route: ActivatedRoute) {
   }
 
-}
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  ngOnInit(): void {
+    console.log('Vor dem Laden der Shops');
+    this.loadShops();
+    console.log('Nach dem Laden der Shops');
+  }
+
+  loadShops(): void {
+    combineLatest(this.route.data)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        if (data[0].shops) {
+          this.shops = data[0].shops;
+        }
+      });
+  }
+
+  replaceUmlaute(str) {
+    return str.replace('UE', 'Ü')
+    .replace('AE', 'Ä')
+    .replace('OE', 'Ö')
+    .replace('ue', 'ü')
+    .replace('ae', 'ä')
+    .replace('oe', 'ö');
+
+  }
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];

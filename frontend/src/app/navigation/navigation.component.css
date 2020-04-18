@@ -2,13 +2,20 @@
   margin-left: auto;
 }
 .navbar {
-  padding: 1.5em 2em;
-  background-color: blanchedalmond;
-
+  padding: 1em;
+  padding-left: 0.5em;
+  background-color: rgba(255, 235, 205, 0.55);
 }
+
 .navbar a{
   padding: 0.5em 0.5em;
-  color: green;
+  color: #131a66;
   margin: 0.5em 0.5em;
+}
+
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0.2em !important;
+  background-color: rgba(105, 105, 105, 0.11);
 }
 
