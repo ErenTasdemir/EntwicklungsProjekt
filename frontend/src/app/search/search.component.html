@@ -4,20 +4,42 @@
   <hr>
   <p></p>
 
+  <div class="col-md-3">
+    <div class="query-search">
+      <label for="query">Suche</label>
+      <input type="text" #query id="query">
+    </div>
+    <div class="radius-search">
+      <label for="location">Ort</label>
+      <input type="text" #location id="location">
+      <mat-slider
+        [(ngModel)]="radiusInput"
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1000"
+        min="0"
+        max="200">Radius
+      </mat-slider>
+    </div>
+
+
+    <button type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
+  </div>
+
   <div class="table">
     <div class="table-content">
       <table>
         <thead>
-          <th>Name</th>
-          <th>Branche</th>
-          <th>Ort</th>
+        <th>Name</th>
+        <th>Branche</th>
+        <th>Ort</th>
         </thead>
         <tbody>
-          <tr *ngFor="let shop of shops">
-            <td class="text-capitalize">{{replaceUmlaute(shop.shopName)}}</td>
-            <td class="text-capitalize">{{replaceUmlaute(shop.shopType)}}</td>
-            <td class="text-capitalize text-">{{replaceUmlaute(shop.shopLocation)}}</td>
-          </tr>
+        <tr *ngFor="let shop of shops">
+          <td class="text-capitalize">{{replaceInUmlaute(shop.shopName)}}</td>
+          <td class="text-capitalize">{{replaceInUmlaute(shop.shopType)}}</td>
+          <td class="text-capitalize text-">{{replaceInUmlaute(shop.shopLocation)}}</td>
+        </tr>
         </tbody>
       </table>
     </div>
