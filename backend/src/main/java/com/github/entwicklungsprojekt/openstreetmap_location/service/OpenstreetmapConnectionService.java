@@ -65,7 +65,7 @@ public class OpenstreetmapConnectionService {
         log.info("Succesfully saved Geodata for Locations!");
     }
 
-    GeoData getLatitudeAndLongitudeFromNominatim(String query) {
+    public GeoData getLatitudeAndLongitudeFromNominatim(String query) {
         log.info("Retrieving Geodata for " + query + " from Nominatim");
         ResponseEntity<String> response = makeGetLocationRequest(query);
         log.info("Nominatim server status : " + response.getStatusCode().toString());

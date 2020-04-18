@@ -11,5 +11,6 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 
     List<ShopProjection> findAllProjectedBy();
 
+    List<Shop> findAllByShopLocationContains(String location);
 
 }
