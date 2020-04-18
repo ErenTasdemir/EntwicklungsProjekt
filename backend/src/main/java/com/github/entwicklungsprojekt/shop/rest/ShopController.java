@@ -44,6 +44,9 @@ public class ShopController {
 
     @GetMapping(path = "/search")
     ResponseEntity<?> searchShops(@RequestParam(name = "query") String query) {
+        if (query.isEmpty()) {
+            return ResponseEntity.ok(shopService.getAllAvailibleShops());
+        }
         List<ShopProjection> projections = new ArrayList<>();
         shopSearchService.searchShops(query).forEach(shop -> projections.add(projectionFactory.createProjection(ShopProjection.class, shop)));
 

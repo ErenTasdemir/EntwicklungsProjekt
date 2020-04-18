@@ -3,7 +3,6 @@ package com.github.entwicklungsprojekt.radius_search.controller;
 import com.github.entwicklungsprojekt.radius_search.service.RadiusSearchService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
-import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
 import com.github.entwicklungsprojekt.shop.service.ShopService;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.http.ResponseEntity;
@@ -22,23 +21,22 @@ public class RadiusSearchController {
 
     private final ShopService shopService;
 
-    private final HibernateSearchService shopSearchService;
-
     private final RadiusSearchService radiusSearchService;
 
     private final ProjectionFactory projectionFactory;
 
-    public RadiusSearchController(ShopService shopService, HibernateSearchService shopSearchService, RadiusSearchService radiusSearchService, ProjectionFactory projectionFactory) {
+    public RadiusSearchController(ShopService shopService, RadiusSearchService radiusSearchService, ProjectionFactory projectionFactory) {
         this.shopService = shopService;
-        this.shopSearchService = shopSearchService;
         this.radiusSearchService = radiusSearchService;
         this.projectionFactory = projectionFactory;
     }
 
     @GetMapping(path = "/searchbyradius", params = {"location" , "radius", "query"})
-    public ResponseEntity<?> searchByRadius(@RequestParam(required = false) String location , @RequestParam(required = false, defaultValue = "0") int radius, @RequestParam(required = false) String query) {
+    public ResponseEntity<?> searchByRadius(@RequestParam(name = "location") String location,
+                                            @RequestParam(name = "radius") int radius,
+                                            @RequestParam(name = "query") String query) {
         var matchingShopLocations = shopService.searchShops(query);
-        if (location.equals("")) {
+        if (location.isEmpty()) {
             return ResponseEntity.ok(getShopProjectionsFromList(matchingShopLocations));
         }
         else {
