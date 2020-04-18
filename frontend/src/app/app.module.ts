@@ -6,9 +6,12 @@ import {AddComponent} from './add/add.component';
 import {SearchComponent} from './search/search.component';
 import { RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import appRoutes from './appRoutes';
+import appRoutingModule from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {ShopService} from './_services/shop.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+
 
 
 @NgModule({
@@ -21,12 +24,15 @@ import {MatTableModule} from '@angular/material/table';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutingModule),
     BrowserAnimationsModule,
     MatTableModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    ShopService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
