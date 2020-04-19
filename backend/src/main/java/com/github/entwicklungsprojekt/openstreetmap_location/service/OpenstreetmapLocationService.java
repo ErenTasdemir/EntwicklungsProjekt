@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,9 +35,10 @@ public class OpenstreetmapLocationService {
         this.defaultCsvPath = defaultCsvPath;
         this.openstreetmapLocationRepository = openstreetmapLocationRepository;
         log.info("Adding location names to Memory");
-        readStaedteOsmIntoMemory();
+
     }
 
+    @PostConstruct
     private void readStaedteOsmIntoMemory() throws IOException {
         String filePath = new File(defaultCsvPath).getAbsolutePath();
         Reader in = new FileReader(filePath);
