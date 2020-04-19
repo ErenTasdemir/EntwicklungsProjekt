@@ -69,7 +69,6 @@ public class OpenstreetmapConnectionService {
                 openstreetmapLocationService.saveLocation(openstreetmapLocation);
             }
         }
-
     }
 
     public GeoData getLatitudeAndLongitudeFromNominatim(String query) {
