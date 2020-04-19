@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,10 +34,9 @@ public class OpenstreetmapLocationService {
         this.defaultCsvPath = defaultCsvPath;
         this.openstreetmapLocationRepository = openstreetmapLocationRepository;
         log.info("Adding location names to Memory");
-
+        readStaedteOsmIntoMemory();
     }
 
-    @PostConstruct
     private void readStaedteOsmIntoMemory() throws IOException {
         String filePath = new File(defaultCsvPath).getAbsolutePath();
         Reader in = new FileReader(filePath);
@@ -71,7 +69,7 @@ public class OpenstreetmapLocationService {
     public List<String> matchShopLocationWithOsmLocationCsv(String shopLocation) {
         List<String> shopLocations = new ArrayList<>();
         List<String> tempList = new ArrayList<>();
-        shopLocation = shopLocation.toLowerCase();
+//        shopLocation = shopLocation.toLowerCase();
         String finalShopLocation = shopLocation;
         this.loadedLocations.forEach(location -> {
             location = location.toLowerCase();
@@ -94,6 +92,9 @@ public class OpenstreetmapLocationService {
                             shouldAddLocation = false;
                             replaceEntry = false;
                             break;
+                        }
+                        if (location.length() == alreadySavedLocation.length()) {
+                            shouldAddLocation = false;
                         }
                         else {
                             shouldAddLocation = true;
@@ -125,7 +126,7 @@ public class OpenstreetmapLocationService {
     private boolean containsExactly (String source , String subItem) {
         subItem = subItem.replaceAll("\\\\" , "/");
         String pattern = "\\b"+subItem+"\\b";
-        Pattern p = Pattern.compile(pattern);
+        Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(source);
 
         return m.find();
