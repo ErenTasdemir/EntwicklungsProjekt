@@ -26,6 +26,9 @@
     <button type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
   </div>
 
+
+  <app-add (shopAdded)="onShopAdded($event)"></app-add>
+
   <div class="table">
     <div class="table-content">
       <table>

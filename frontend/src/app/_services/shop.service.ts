@@ -8,13 +8,11 @@ export class ShopService {
   constructor(private http: HttpClient) { }
 
   getAllShops(): Observable<Shop[]> {
-    console.log('Ich bin im ShopService');
     return this.http.get<Shop[]>('http://localhost:8081/shops');
   }
 
   searchShops(query: string): Observable<Shop[]> {
     query = encodeURI(query.replace('&', ' '));
-    console.log(query);
     return this.http.get<Shop[]>( `http://localhost:8081/shops/search?query=${query}`);
 }
 

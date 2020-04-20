@@ -1,0 +1,28 @@
+.row{
+  margin-top: 50px;
+}
+.shop {
+  width: 20%;
+  display: table-cell;
+}
+.sector {
+  width: 20%;
+  display: table-cell;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.location {
+  width: 20%;
+  display: table-cell;
+}
+.button {
+  display: table-cell;
+  padding-left: 10px;
+}
+table {
+  width: 100%;
+  margin-top: 50px;
+}
+input.ng-invalid.ng-touched{
+  border: 1px solid red;
+}

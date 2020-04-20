@@ -1,1 +1,45 @@
-<h3>Hier können Sie eigene Shops hinzufügen!</h3>
+<div class="container">
+  <div class="row">
+    <form (ngSubmit)="onInsert(shopName, shopType, shopLocation)" #f="ngForm">
+      <div class="shop">
+        <input type="text" id="shopName" placeholder="Name" class="form-control" ngModel name="Name" required #shopName="ngModel">
+        <span class="help-block" *ngIf="!shopName.valid && shopName.touched">Bitte geben Sie einen Namen ein!</span>
+      </div>
+      <div class="sector">
+        <input type="text" id="shopType" placeholder="Branche" class="form-control" ngModel name="Branche" required #shopType="ngModel">
+        <span class="help-block" *ngIf="!shopType.valid && shopType.touched">Bitte geben Sie eine Branche ein!</span>
+      </div>
+      <div class="location">
+        <input type="text" id="shopLocation" placeholder="Ort" class="form-control" ngModel name="Ort" required #shopLocation="ngModel">
+        <span class="help-block" *ngIf="!shopLocation.valid && shopLocation.touched">Bitte geben Sie einen Ort ein!</span>
+      </div>
+      <div class="button">
+        <button class="btn btn-primary" type=submit [disabled]="!f.valid">Insert</button>
+      </div>
+<!--      <div class="table" *ngIf="submitted">-->
+<!--        <div class="table-content">-->
+<!--          <table>-->
+<!--            <thead>-->
+<!--            <th>Name</th>-->
+<!--            <th>Branche</th>-->
+<!--            <th>Ort</th>-->
+<!--            <th>Action</th>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let shop of shops">-->
+<!--              <td>{{shop.shopName}}</td>-->
+<!--              <td>{{shop.shopType}}</td>-->
+<!--              <td>{{shop.shopLocation}}</td>-->
+<!--              <td><input class="btn btn-success" type="button" ng-click="Add()" value="Add">-->
+<!--                <input class="btn btn-info" type="button" ng-click="Edit()" value="Edit">-->
+<!--                <input class="btn btn-danger" type="button" ng-click="Delete()" value="Delete">-->
+<!--              </td>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
+<!--      </div>-->
+    </form>
+  </div>
+</div>
+
+

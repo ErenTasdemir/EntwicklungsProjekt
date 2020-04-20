@@ -12,7 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 import {ShopService} from './_services/shop.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSliderModule} from '@angular/material/slider';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 

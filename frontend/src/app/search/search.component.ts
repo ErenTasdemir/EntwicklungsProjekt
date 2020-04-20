@@ -3,6 +3,7 @@ import {combineLatest, Subject} from 'rxjs';
 import {Shop, ShopService} from '../_services/shop.service';
 import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
+import {ShopData} from '../add/add.component';
 
 @Component({
   selector: 'app-search',
@@ -22,26 +23,18 @@ export class SearchComponent implements OnInit {
   destroy$ = new Subject<void>();
   radiusInput: number;
 
-  formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
+  formatLabel(value) {
+    return value + 'km';
   }
-
   constructor(private shopService: ShopService,
               private route: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
-    console.log('Vor dem Laden der Shops');
     this.loadShops();
-    console.log('Nach dem Laden der Shops');
     this.sendSearch.subscribe(query => {
       this.query = query;
-      console.log(query);
       this.shopService.searchShops(this.query);
     });
   }
@@ -76,15 +69,17 @@ export class SearchComponent implements OnInit {
 
 
   sendSearchRequest(query: HTMLInputElement, location: HTMLInputElement, radius: number) {
-    console.log(location.value);
     if (radius == null) {
       radius = 0;
     }
     this.shopService.searchShopsByRadius(this.replaceFromUmlaute(query.value).toLowerCase(),
       this.replaceFromUmlaute(location.value).toLowerCase(), radius)
       .subscribe(data => {
-      console.log(data);
       this.shops = data;
     });
+  }
+
+  onShopAdded(shop: ShopData) {
+    this.shops.push(shop);
   }
 }
