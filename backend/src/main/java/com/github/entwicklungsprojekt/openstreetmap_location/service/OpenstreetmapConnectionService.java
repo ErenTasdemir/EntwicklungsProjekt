@@ -42,30 +42,33 @@ public class OpenstreetmapConnectionService {
     public void setLatitudeAndLongitueForLoadedShops() {
         log.info("Setting Geodata for loaded shops");
         for (Shop shop : shopRepository.findAll()) {
-            if (shop.getLocations() == null || shop.getLocations().isEmpty()){
-                List<String> projectLocationNames = openstreetmapLocationService.matchShopLocationWithOsmLocationCsv(shop.getShopLocation());
-                for (String location : projectLocationNames) {
-                    OpenstreetmapLocation openstreetmapLocation;
-                    if (!openstreetmapLocationService.existsByName(location)) {
-                        openstreetmapLocation = new OpenstreetmapLocation();
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                            openstreetmapLocation.setGeoData(getLatitudeAndLongitudeFromNominatim(location));
-                        }
-                        catch (HttpStatusCodeException | InterruptedException e) {
-                            log.error("Nominatim connection has timed out");
-                        }
-                        openstreetmapLocation.setName(location);
-                    } else {
-                        openstreetmapLocation = openstreetmapLocationService.getOneByLocationName(location);
-                    }
-                    openstreetmapLocation.addShop(shop);
-                    openstreetmapLocationService.saveLocation(openstreetmapLocation);
-                }
-            }
-
+            setLatitudeAndLongitudeForGivenShop(shop);
         }
         log.info("Succesfully saved Geodata for Locations!");
+    }
+
+    public void setLatitudeAndLongitudeForGivenShop(Shop shop) {
+        if (shop.getLocations() == null || shop.getLocations().isEmpty()){
+            List<String> projectLocationNames = openstreetmapLocationService.matchShopLocationWithOsmLocationCsv(shop.getShopLocation());
+            for (String location : projectLocationNames) {
+                OpenstreetmapLocation openstreetmapLocation;
+                if (!openstreetmapLocationService.existsByName(location)) {
+                    openstreetmapLocation = new OpenstreetmapLocation();
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                        openstreetmapLocation.setGeoData(getLatitudeAndLongitudeFromNominatim(location));
+                    }
+                    catch (HttpStatusCodeException | InterruptedException e) {
+                        log.error("Nominatim connection has timed out");
+                    }
+                    openstreetmapLocation.setName(location);
+                } else {
+                    openstreetmapLocation = openstreetmapLocationService.getOneByLocationName(location);
+                }
+                openstreetmapLocation.addShop(shop);
+                openstreetmapLocationService.saveLocation(openstreetmapLocation);
+            }
+        }
     }
 
     public GeoData getLatitudeAndLongitudeFromNominatim(String query) {

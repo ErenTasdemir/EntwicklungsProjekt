@@ -21,3 +21,36 @@ table {
   display: block;
 }
 
+::ng-deep mat-slider {
+  /*background: #131a66 !important;*/
+  width: 300px;
+  border-radius: 5px;
+  /*border: 1px solid darkred;*/
+  vertical-align: middle;
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+::ng-deep .mat-slider-thumb {
+  background-color: #c4b9a2 !important;
+}
+
+::ng-deep .mat-slider {
+  color: #c4b9a2;
+}
+
+::ng-deep .mat-slider-track-background  {
+  background-color: #c4b9a2 !important;
+}
+
+
+/* CSS to change 'Primary' color */
+
+::ng-deep .mat-accent .mat-slider-thumb {
+  background-color: #c4b9a2;
+}
+::ng-deep .mat-accent .mat-slider-thumb-label {
+  background-color: #c4b9a2;
+}
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background-color: #c4b9a2;
+}

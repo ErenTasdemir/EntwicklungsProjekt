@@ -11,9 +11,22 @@ export class ShopService {
     console.log('Ich bin im ShopService');
     return this.http.get<Shop[]>('http://localhost:8081/shops');
   }
+
+  searchShops(query: string): Observable<Shop[]> {
+    query = encodeURI(query.replace('&', ' '));
+    console.log(query);
+    return this.http.get<Shop[]>( `http://localhost:8081/shops/search?query=${query}`);
+}
+
+  searchShopsByRadius(query: string, location: string, radius: number): Observable<Shop[]> {
+    query = encodeURI(query.replace('&', ' '));
+    location = encodeURI(location.replace('&', ' '));
+    return this.http.get<Shop[]>( `http://localhost:8081/shops/search/searchbyradius?query=${query}&location=${location}&radius=${radius}`);
+  }
 }
 
 export interface Shop {
+  shopId: string;
   shopLocation: string;
   shopName: string;
   shopType: string;

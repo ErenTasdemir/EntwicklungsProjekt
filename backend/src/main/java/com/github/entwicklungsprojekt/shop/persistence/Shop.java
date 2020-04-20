@@ -1,10 +1,8 @@
 package com.github.entwicklungsprojekt.shop.persistence;
 
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
@@ -14,17 +12,14 @@ import java.util.Set;
 
 
 @Indexed
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @Entity
 @Table(name = "shop")
 public class Shop {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long shopId;
 
     @Column(name = "shop_name")
@@ -44,5 +39,28 @@ public class Shop {
 
     @ManyToMany(mappedBy = "shops", fetch = FetchType.EAGER)
     Set<OpenstreetmapLocation> locations;
+
+    public Shop(String shopName, String shopLocation, String shopType) {
+        this.shopName = shopName;
+        this.shopLocation = shopLocation;
+        this.shopType = shopType;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public void setShopType(String shopType) {
+        this.shopType = shopType;
+    }
+
+    public void setShopLocation(String shopLocation) {
+        this.shopLocation = shopLocation;
+    }
+
+    public void setLocations(Set<OpenstreetmapLocation> locations) {
+        this.locations = locations;
+    }
+
 
 }
