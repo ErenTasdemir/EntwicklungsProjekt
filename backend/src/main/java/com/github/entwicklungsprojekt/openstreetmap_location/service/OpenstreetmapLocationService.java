@@ -67,61 +67,21 @@ public class OpenstreetmapLocationService {
     }
 
     public List<String> matchShopLocationWithOsmLocationCsv(String shopLocation) {
-        List<String> shopLocations = new ArrayList<>();
-        List<String> tempList = new ArrayList<>();
-//        shopLocation = shopLocation.toLowerCase();
-        String finalShopLocation = shopLocation;
-        this.loadedLocations.forEach(location -> {
-            location = location.toLowerCase();
-            if (containsExactly(finalShopLocation, location)){
-
-                if (!shopLocations.isEmpty()){
-                    int index = 0;
-                    boolean shouldAddLocation = false;
-                    boolean replaceEntry = false;
-                    int replaceIndex = 0;
-                    for (String alreadySavedLocation: tempList) {
-
-                        if (containsExactly(location, alreadySavedLocation) && location.length() != alreadySavedLocation.length()){
-                            shouldAddLocation = true;
-                            replaceEntry = true;
-                            replaceIndex = index;
-                            break;
-                        }
-                        if (containsExactly(alreadySavedLocation, location) && location.length() != alreadySavedLocation.length()) {
-                            shouldAddLocation = false;
-                            replaceEntry = false;
-                            break;
-                        }
-                        if (location.length() == alreadySavedLocation.length()) {
-                            shouldAddLocation = false;
-                        }
-                        else {
-                            shouldAddLocation = true;
-                        }
-                        index++;
-                    }
-                    if (shouldAddLocation) {
-                        log.info("Matching " + finalShopLocation + " with " + location);
-                        if(replaceEntry) {
-                            shopLocations.set(replaceIndex, location);
-                        }
-                        else {
-                            shopLocations.add(location);
-                        }
-                    }
-                }
-                else {
-                    shopLocations.add(location);
-                }
-
-                tempList.add(location);
-            }
-        });
-
-        return shopLocations;
+        List<String> matchedCityNames = new ArrayList<>();
+        this.loadedLocations.forEach(cityName -> updateProjectLocationsListIfMatches(shopLocation, matchedCityNames, cityName));
+        return matchedCityNames;
     }
 
+    private void updateProjectLocationsListIfMatches(String shopLocation, List<String> matchedCityNames, String cityName) {
+        if (containsExactly(shopLocation, cityName)) {
+            if (matchedCityNames.isEmpty()) {
+                matchedCityNames.add(cityName.toLowerCase());
+            } else {
+                AddOrReplaceDecision addOrReplaceDecision = new AddOrReplaceDecision();
+                addOrReplaceDecision.applyToList(matchedCityNames, cityName.toLowerCase());
+            }
+        }
+    }
 
     private boolean containsExactly (String source , String subItem) {
         subItem = subItem.replaceAll("\\\\" , "/");
@@ -130,6 +90,57 @@ public class OpenstreetmapLocationService {
         Matcher m = p.matcher(source);
 
         return m.find();
+    }
+
+    private class AddOrReplaceDecision {
+        boolean shouldPutIntoList;
+        boolean shouldReplaceAnEntry;
+
+        private void decideAddOrReplace(String matchedCityName, String cityName) {
+            if (cityName.length() == matchedCityName.length()) {
+                add();
+            }
+            if (containsExactly(cityName, matchedCityName)) {
+                replace();
+            }
+            else if (containsExactly(matchedCityName, cityName)) {
+                dontAddOrReplace();
+            }
+            else {
+                add();
+            }
+        }
+
+        private void add() {
+            this.shouldPutIntoList = true;
+            this.shouldReplaceAnEntry = false;
+        }
+
+        private void replace() {
+            this.shouldPutIntoList = true;
+            this.shouldReplaceAnEntry = true;
+        }
+
+        private void dontAddOrReplace() {
+            this.shouldPutIntoList = false;
+            this.shouldReplaceAnEntry = false;
+        }
+
+        private void applyToList(List<String> matchedCityNames, String cityName) {
+            int index = 0;
+            for (String matchedCityName : matchedCityNames){
+                decideAddOrReplace(matchedCityName, cityName);
+                if (this.shouldReplaceAnEntry) {
+                    break;
+                }
+                index+=1;
+            }
+            if (this.shouldReplaceAnEntry){
+                matchedCityNames.set(index, cityName);
+            } else if (this.shouldPutIntoList) {
+                matchedCityNames.add(cityName);
+            }
+        }
     }
 
 }
