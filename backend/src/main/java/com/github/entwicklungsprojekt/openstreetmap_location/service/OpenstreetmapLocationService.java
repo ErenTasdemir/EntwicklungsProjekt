@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 @Service
 @Transactional
 public class OpenstreetmapLocationService {
-    public List<String> loadedLocations = new ArrayList<>();
+    private List<String> loadedLocations = new ArrayList<>();
 
     private final String defaultCsvPath;
 
