@@ -4,14 +4,16 @@
   <hr>
   <p></p>
 
-  <div class="col-md-3">
-    <div class="query-search">
+  <div class="parent radius-search-parent">
+    <div class="child radius-search-child">
       <label for="query">Suche</label>
-      <input type="text" #query id="query">
+      <input class="form-control" type="text" #query id="query" >
     </div>
-    <div class="radius-search">
+    <div class="child radius-search-child">
       <label for="location">Ort</label>
-      <input type="text" #location id="location">
+      <input class="form-" type="text" #location id="location">
+    </div>
+    <div class="child radius-search-child">
       <mat-slider
         [(ngModel)]="radiusInput"
         thumbLabel
@@ -21,14 +23,10 @@
         max="200">Radius
       </mat-slider>
     </div>
-
-
-    <button type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
   </div>
-
-
+  <button class="btn btn-success" type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
+  <button class="btn btn-primary" (click)="openDialog()"><em class="material-icons">add</em></button>
   <app-add (shopAdded)="onShopAdded($event)"></app-add>
-
   <div class="table">
     <div class="table-content">
       <table>
@@ -38,10 +36,12 @@
         <th>Ort</th>
         </thead>
         <tbody>
-        <tr *ngFor="let shop of shops">
+        <tr *ngFor="let shop of shops" class="show-table">
           <td class="text-capitalize">{{replaceInUmlaute(shop.shopName)}}</td>
           <td class="text-capitalize">{{replaceInUmlaute(shop.shopType)}}</td>
           <td class="text-capitalize text-">{{replaceInUmlaute(shop.shopLocation)}}</td>
+          <td><em class="material-icons">create</em></td>
+          <td><em class="material-icons">delete</em></td>
         </tr>
         </tbody>
       </table>

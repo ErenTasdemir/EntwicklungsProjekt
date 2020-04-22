@@ -14,6 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -23,7 +24,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NavigationComponent,
     AddComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,8 +34,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     HttpClientModule,
     MatSliderModule,
     FormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule
   ],
+
   providers: [
     ShopService
   ],

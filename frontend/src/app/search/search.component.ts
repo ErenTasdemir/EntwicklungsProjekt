@@ -3,7 +3,8 @@ import {combineLatest, Subject} from 'rxjs';
 import {Shop, ShopService} from '../_services/shop.service';
 import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {ShopData} from '../add/add.component';
+import {AddComponent, ShopData} from '../add/add.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-search',
@@ -26,8 +27,10 @@ export class SearchComponent implements OnInit {
   formatLabel(value) {
     return value + 'km';
   }
+
   constructor(private shopService: ShopService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public dialog: MatDialog) {
   }
 
 
@@ -51,11 +54,11 @@ export class SearchComponent implements OnInit {
 
   replaceInUmlaute(str) {
     return str.replace('UE', 'Ü')
-    .replace('AE', 'Ä')
-    .replace('OE', 'Ö')
-    .replace('ue', 'ü')
-    .replace('ae', 'ä')
-    .replace('oe', 'ö');
+      .replace('AE', 'Ä')
+      .replace('OE', 'Ö')
+      .replace('ue', 'ü')
+      .replace('ae', 'ä')
+      .replace('oe', 'ö');
   }
 
   replaceFromUmlaute(str) {
@@ -75,11 +78,21 @@ export class SearchComponent implements OnInit {
     this.shopService.searchShopsByRadius(this.replaceFromUmlaute(query.value).toLowerCase(),
       this.replaceFromUmlaute(location.value).toLowerCase(), radius)
       .subscribe(data => {
-      this.shops = data;
-    });
+        this.shops = data;
+      });
   }
 
   onShopAdded(shop: ShopData) {
-    this.shops.push(shop);
+    this.shopService.addNewShop(shop.shopName, shop.shopType, shop.shopLocation)
+      .subscribe(data => {
+        this.shops.push(data);
+      });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result : ${result}`);
+    });
   }
 }

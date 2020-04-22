@@ -19,6 +19,12 @@
   display: table-cell;
   padding-left: 10px;
 }
+.btn-primary {
+  color: black;
+  background-color: lightgreen;
+  border-color: green;
+
+}
 table {
   width: 100%;
   margin-top: 50px;

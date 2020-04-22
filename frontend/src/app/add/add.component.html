@@ -6,7 +6,14 @@
         <span class="help-block" *ngIf="!shopName.valid && shopName.touched">Bitte geben Sie einen Namen ein!</span>
       </div>
       <div class="sector">
-        <input type="text" id="shopType" placeholder="Branche" class="form-control" ngModel name="Branche" required #shopType="ngModel">
+        <!-- <input type="text" id="shopType" placeholder="Branche" class="form-control" ngModel name="Branche" required #shopType="ngModel"> -->
+        <select class="form-control"  id="shopType" name="singleSelect" ngModel="data.singleSelect" required #shopType="ngModel">
+          <option value="" disabled selected hidden>Branche</option>
+          <option value="Bäckerei">Bäckerei</option>
+          <option value="Textilien">Textilien</option>
+          <option value="Lebensmittel">Lebensmittel</option>
+          <option value="Spielwaren">Spielwaren</option>
+        </select>
         <span class="help-block" *ngIf="!shopType.valid && shopType.touched">Bitte geben Sie eine Branche ein!</span>
       </div>
       <div class="location">
@@ -14,7 +21,8 @@
         <span class="help-block" *ngIf="!shopLocation.valid && shopLocation.touched">Bitte geben Sie einen Ort ein!</span>
       </div>
       <div class="button">
-        <button class="btn btn-primary" type=submit [disabled]="!f.valid">Insert</button>
+        <button class="btn btn-primary"  type=submit [disabled]="!f.valid">Einfügen</button>
+        <button class="btn btn-danger"   type="button">Abbrechen</button>
       </div>
 <!--      <div class="table" *ngIf="submitted">-->
 <!--        <div class="table-content">-->

@@ -54,3 +54,22 @@ table {
 ::ng-deep .mat-accent .mat-slider-track-fill {
   background-color: #c4b9a2;
 }
+
+
+.radius-search-parent {
+  display: flex;
+}
+.radius-search-child {
+  flex: 1;
+  align-self: baseline;
+}
+.mat-input-element {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  width: 75%;
+}
+
+.show-table:hover {
+  background-color: lightgray;
+}
+

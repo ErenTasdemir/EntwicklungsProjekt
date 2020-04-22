@@ -21,6 +21,18 @@ export class ShopService {
     location = encodeURI(location.replace('&', ' '));
     return this.http.get<Shop[]>( `http://localhost:8081/shops/search/searchbyradius?query=${query}&location=${location}&radius=${radius}`);
   }
+
+  addNewShop(shopName: string, shopType: string, shopLocation: string): Observable<Shop> {
+    // shopName = encodeURI(shopName.replace('&', ' '));
+    // shopType = encodeURI(shopType.replace('&', ' '));
+    // shopLocation = encodeURI(shopLocation.replace('&', ' '));
+    const body = {
+      shopName,
+      shopType,
+      shopLocation
+    };
+    return this.http.post<Shop>('http://localhost:8081/shops/add', body);
+  }
 }
 
 export interface Shop {
