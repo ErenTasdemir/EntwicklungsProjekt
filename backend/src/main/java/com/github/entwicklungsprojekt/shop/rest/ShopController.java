@@ -57,7 +57,7 @@ public class ShopController {
 
     @PostMapping(path = "/add")
     ResponseEntity<?> addShop(@RequestBody ShopPayload shopPayload) {
-        var shop = shopService.addShop(shopPayload.getShopName(), shopPayload.getShopType(), shopPayload.getShopLocation());
+        var shop = shopService.addShop(shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType());
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);

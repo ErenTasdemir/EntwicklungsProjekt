@@ -1,6 +1,6 @@
-drop table if exists shop;
+-- drop table if exists shop;
 
-create table shop (
+create table if not exists shop (
 
     shop_id bigint(20) auto_increment not null primary key,
     shop_name varchar(255) not null,
@@ -9,7 +9,7 @@ create table shop (
 );
 
 
-insert into shop (shop_id, shop_name, shop_type, shop_location) values
+merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) values
 (1, 'Bakery Crumble', 'baeckerei', 'bochum'),
 (2, 'Bake Bake Bake', 'baeckerei', 'dortmund'),
 (3, 'Fair and Wear', 'textilien', 'essen'),
