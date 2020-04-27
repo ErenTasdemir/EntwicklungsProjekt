@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {AddComponent, ShopData} from '../add/add.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ShopDialogComponent} from '../shop-dialog/shop-dialog.component';
 
 @Component({
   selector: 'app-search',
@@ -24,11 +25,16 @@ export class SearchComponent implements OnInit {
   destroy$ = new Subject<void>();
   radiusInput: number;
 
+  selectedFile: File;
+  message: string;
+  imageName: string;
+  retrievedImage: any;
+
   formatLabel(value) {
     return value + 'km';
   }
 
-  constructor(private shopService: ShopService,
+  constructor(public shopService: ShopService,
               private route: ActivatedRoute,
               public dialog: MatDialog) {
   }
@@ -52,31 +58,15 @@ export class SearchComponent implements OnInit {
       });
   }
 
-  replaceInUmlaute(str) {
-    return str.replace('UE', 'Ü')
-      .replace('AE', 'Ä')
-      .replace('OE', 'Ö')
-      .replace('ue', 'ü')
-      .replace('ae', 'ä')
-      .replace('oe', 'ö');
-  }
 
-  replaceFromUmlaute(str) {
-    return str.replace('Ü', 'UE')
-      .replace('Ä', 'AE')
-      .replace('Ö', 'OE')
-      .replace('ü', 'ue')
-      .replace('ä', 'ae')
-      .replace('ö', 'oe');
-  }
 
 
   sendSearchRequest(query: HTMLInputElement, location: HTMLInputElement, radius: number) {
     if (radius == null) {
       radius = 0;
     }
-    this.shopService.searchShopsByRadius(this.replaceFromUmlaute(query.value).toLowerCase(),
-      this.replaceFromUmlaute(location.value).toLowerCase(), radius)
+    this.shopService.searchShopsByRadius(this.shopService.replaceFromUmlaute(query.value).toLowerCase(),
+      this.shopService.replaceFromUmlaute(location.value).toLowerCase(), radius)
       .subscribe(data => {
         this.shops = data;
       });
@@ -93,6 +83,40 @@ export class SearchComponent implements OnInit {
     const dialogRef = this.dialog.open(AddComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result : ${result}`);
+    });
+  }
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.shopService.saveImageToShop(1, uploadImageData).subscribe(response => {
+        this.shops.push(response);
+      });
+
+  }
+
+  getImage(shopId: string) {
+    this.shopService.getShopById(shopId).subscribe(data => {
+      this.retrievedImage = data.shopImage;
+    });
+
+  }
+
+  openShopDialog(shop: Shop) {
+    const dialogRef = this.dialog.open(ShopDialogComponent, {
+      data: {
+        shop
+      }
+    });
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        const i = this.shops.indexOf(value.shopId);
+        this.shops.splice(i, 1, value);
+      }
     });
   }
 }

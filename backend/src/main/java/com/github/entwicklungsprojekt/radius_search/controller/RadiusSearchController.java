@@ -2,7 +2,7 @@ package com.github.entwicklungsprojekt.radius_search.controller;
 
 import com.github.entwicklungsprojekt.radius_search.service.RadiusSearchService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
-import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
+import com.github.entwicklungsprojekt.shop.projection.ShopProjectionWithoutPicture;
 import com.github.entwicklungsprojekt.shop.service.ShopService;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.http.ResponseEntity;
@@ -47,18 +47,18 @@ public class RadiusSearchController {
         }
     }
 
-    private List<ShopProjection> getShopProjectionsFromList(List<Shop> shopList) {
-        List<ShopProjection> projections = new ArrayList<>();
-        shopList.forEach(shop -> projections.add(projectionFactory.createProjection(ShopProjection.class, shop)));
+    private List<ShopProjectionWithoutPicture> getShopProjectionsFromList(List<Shop> shopList) {
+        List<ShopProjectionWithoutPicture> projections = new ArrayList<>();
+        shopList.forEach(shop -> projections.add(projectionFactory.createProjection(ShopProjectionWithoutPicture.class, shop)));
         return projections;
     }
 
-    private List<ShopProjection> getShopProjectionsForMatchingShopIds(List<Shop> shopsToMatchIn, List<Long> idsToSearchFor) {
-        List<ShopProjection> projections = new ArrayList<>();
+    private List<ShopProjectionWithoutPicture> getShopProjectionsForMatchingShopIds(List<Shop> shopsToMatchIn, List<Long> idsToSearchFor) {
+        List<ShopProjectionWithoutPicture> projections = new ArrayList<>();
         idsToSearchFor.forEach(shopId -> {
             for (Shop shop: shopsToMatchIn ) {
                 if (shop.getShopId().equals(shopId)) {
-                    projections.add(projectionFactory.createProjection(ShopProjection.class, shop));
+                    projections.add(projectionFactory.createProjection(ShopProjectionWithoutPicture.class, shop));
                 }
             }
         });

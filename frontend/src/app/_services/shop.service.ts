@@ -23,15 +23,38 @@ export class ShopService {
   }
 
   addNewShop(shopName: string, shopType: string, shopLocation: string): Observable<Shop> {
-    // shopName = encodeURI(shopName.replace('&', ' '));
-    // shopType = encodeURI(shopType.replace('&', ' '));
-    // shopLocation = encodeURI(shopLocation.replace('&', ' '));
     const body = {
       shopName,
       shopType,
       shopLocation
     };
     return this.http.post<Shop>('http://localhost:8081/shops/add', body);
+  }
+
+  getShopById(shopId: string): Observable<Shop> {
+    return this.http.get<Shop>(`http://localhost:8081/shops/${shopId}`);
+  }
+
+  saveImageToShop(shopId: number, image: FormData): Observable<Shop> {
+    return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/upload`, image);
+  }
+
+  replaceInUmlaute(str) {
+    return str.replace('UE', 'Ü')
+      .replace('AE', 'Ä')
+      .replace('OE', 'Ö')
+      .replace('ue', 'ü')
+      .replace('ae', 'ä')
+      .replace('oe', 'ö');
+  }
+
+  replaceFromUmlaute(str) {
+    return str.replace('Ü', 'UE')
+      .replace('Ä', 'AE')
+      .replace('Ö', 'OE')
+      .replace('ü', 'ue')
+      .replace('ä', 'ae')
+      .replace('ö', 'oe');
   }
 }
 
@@ -40,5 +63,6 @@ export interface Shop {
   shopLocation: string;
   shopName: string;
   shopType: string;
+  shopImage ?: any;
 
 }

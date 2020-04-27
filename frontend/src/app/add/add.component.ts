@@ -8,6 +8,7 @@ export class ShopData implements Shop{
   shopType: string;
   shopLocation: string;
   shopId: string;
+  shopImage ?: any;
 }
 @Component({
   selector: 'app-add',

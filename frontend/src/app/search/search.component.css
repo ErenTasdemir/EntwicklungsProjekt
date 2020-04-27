@@ -71,5 +71,6 @@ table {
 
 .show-table:hover {
   background-color: lightgray;
+  cursor: pointer;
 }
 

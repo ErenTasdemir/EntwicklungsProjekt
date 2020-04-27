@@ -37,6 +37,11 @@ public class Shop {
     @Field
     String shopLocation;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "shop_image")
+    private byte[] shopImage;
+
     @ManyToMany(mappedBy = "shops", fetch = FetchType.EAGER)
     Set<OpenstreetmapLocation> locations;
 
@@ -62,5 +67,7 @@ public class Shop {
         this.locations = locations;
     }
 
-
+    public void setShopImage(byte[] shopImage) {
+        this.shopImage = shopImage;
+    }
 }

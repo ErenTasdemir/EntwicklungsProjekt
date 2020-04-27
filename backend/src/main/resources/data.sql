@@ -5,7 +5,8 @@ create table if not exists shop (
     shop_id bigint(20) auto_increment not null primary key,
     shop_name varchar(255) not null,
     shop_type varchar(255) not null,
-    shop_location varchar(255) not null
+    shop_location varchar(255) not null,
+    shop_image image
 );
 
 

@@ -15,6 +15,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
 
 
 
@@ -25,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AddComponent,
     SearchComponent,
     HomeComponent,
+    ShopDialogComponent,
   ],
   imports: [
     BrowserModule,

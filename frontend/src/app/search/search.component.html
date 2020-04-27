@@ -26,7 +26,48 @@
   </div>
   <button class="btn btn-success" type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
   <button class="btn btn-primary" (click)="openDialog()"><em class="material-icons">add</em></button>
+  <hr>
   <app-add (shopAdded)="onShopAdded($event)"></app-add>
+  <hr>
+
+
+  <div class="image-upload">
+    <div class="container row">
+      <div class="col-md-12">
+        <h1>Upload Image</h1>
+      </div>
+    </div>
+    <div class="container row">
+      <div class="col-md-6">
+        <input type="file" (change)="onFileChanged($event)">
+      </div>
+      <div class="col-md-6">
+        <input type="button" (click)="onUpload()" value="upload">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container row">
+    <div class="col-md-12">
+      <div *ngIf=message>{{message}}</div>
+    </div>
+  </div>
+  <div class="container row">
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName" name="name">
+    </div>
+<!--    <div class="col-md-6">-->
+<!--      <input type="button" (click)="getImage()" value="Get Image">-->
+<!--    </div>-->
+  </div>
+  <div class="container row">
+    <div class="col-md-12">
+      <div *ngIf=retrievedImage>
+        <img style="width: 40px;" src="data:image/gif;base64,{{retrievedImage}}">
+      </div>
+    </div>
+  </div>
+
   <div class="table">
     <div class="table-content">
       <table>
@@ -36,12 +77,12 @@
         <th>Ort</th>
         </thead>
         <tbody>
-        <tr *ngFor="let shop of shops" class="show-table">
-          <td class="text-capitalize">{{replaceInUmlaute(shop.shopName)}}</td>
-          <td class="text-capitalize">{{replaceInUmlaute(shop.shopType)}}</td>
-          <td class="text-capitalize text-">{{replaceInUmlaute(shop.shopLocation)}}</td>
-          <td><em class="material-icons">create</em></td>
-          <td><em class="material-icons">delete</em></td>
+        <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
+          <td class="text-capitalize"><img  *ngIf="shop.shopImage" style="width: 35px; margin-right: 1em" src="data:image/gif;base64,{{shop.shopImage}}">{{shopService.replaceInUmlaute(shop.shopName)}}</td>
+          <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
+          <td class="text-capitalize ">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
+<!--          <td><em class="material-icons">create</em></td>-->
+<!--          <td><em class="material-icons">delete</em></td>-->
         </tr>
         </tbody>
       </table>
