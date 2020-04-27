@@ -1,0 +1,39 @@
+mat-dialog-content {
+  max-width: 100%;
+  min-width: 75vh;
+}
+
+.image-container {
+  float: left;
+  margin-right: 2em;
+  padding-left: 1em;
+}
+
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.details-container {
+  float: right;
+}
+
+h4 {
+  font-size: 14px;
+  margin: 0 0.5em 0.75em 0;
+}
+
+p {
+  align-self: center;
+  margin: 0 0.5em 0.75em 0;
+}
+
+.buttons-container {
+  float: right;
+  margin-top: 1em;
+  padding-left: 1em;
+}
+
+.btn-sm {
+  margin: 0.5em;
+}
