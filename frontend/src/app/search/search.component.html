@@ -24,7 +24,7 @@
         <th>Name</th>
         <th>Branche</th>
         <th>Ort</th>
-        <th><button class="btn btn-primary" (click)="openDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
+        <th><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
         </thead>
         <tbody>
         <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">

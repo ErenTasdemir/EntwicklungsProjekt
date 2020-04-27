@@ -22,6 +22,7 @@ export class AddComponent implements OnInit {
 
   submitted = false;
   shops: ShopData[] = [];
+  shop: Shop;
 
   constructor(private shopService: ShopService) {
   }
