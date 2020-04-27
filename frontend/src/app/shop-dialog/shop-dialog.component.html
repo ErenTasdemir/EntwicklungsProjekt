@@ -36,10 +36,22 @@
       </div>
     </div>
     <div class="row buttons-container">
-      <button *ngIf="!isEditing" class="btn-sm btn-group btn-info" (click)="onEdit()">Bearbeiten</button>
-      <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onAccept()">Anwenden</button>
-      <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onCancel()">Abbrechen</button>
-      <button class="btn-sm btn-group btn-danger" (click)="onDelete()">Löschen</button>
+      <div *ngIf="isEditing">
+        <div class="container row">
+          <div class="col-md-6">
+            <input type="file" (change)="onFileChanged($event)">
+          </div>
+          <div class="col-md-6">
+            <input type="button" (click)="onUpload(shop.shopId)" value="upload">
+          </div>
+        </div>
+      </div>
+      <div>
+        <button *ngIf="!isEditing" class="btn-sm btn-group btn-info" (click)="onEdit()">Bearbeiten</button>
+        <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onAccept()">Anwenden</button>
+        <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onCancel()">Abbrechen</button>
+        <button class="btn-sm btn-group btn-danger" (click)="onDelete()">Löschen</button>
+      </div>
     </div>
   </div>
 </mat-dialog-content>

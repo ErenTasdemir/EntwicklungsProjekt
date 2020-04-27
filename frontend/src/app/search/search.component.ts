@@ -25,7 +25,6 @@ export class SearchComponent implements OnInit {
   destroy$ = new Subject<void>();
   radiusInput: number;
 
-  selectedFile: File;
   message: string;
   imageName: string;
   retrievedImage: any;
@@ -84,26 +83,6 @@ export class SearchComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result : ${result}`);
     });
-  }
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  onUpload() {
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.shopService.saveImageToShop(1, uploadImageData).subscribe(response => {
-        this.shops.push(response);
-      });
-
-  }
-
-  getImage(shopId: string) {
-    this.shopService.getShopById(shopId).subscribe(data => {
-      this.retrievedImage = data.shopImage;
-    });
-
   }
 
   openShopDialog(shop: Shop) {

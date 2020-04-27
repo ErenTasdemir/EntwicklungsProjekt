@@ -14,7 +14,8 @@ export interface ShopDialogComponentData {
 export class ShopDialogComponent implements OnInit {
   shop: Shop;
   isEditing = false;
-  defaultShopType: string;
+
+  selectedFile: File;
 
   options = [
     'Baeckerei',
@@ -44,6 +45,19 @@ export class ShopDialogComponent implements OnInit {
   }
 
   onDelete() {
+
+  }
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload(shopId: string) {
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.shopService.saveImageToShop(shopId, uploadImageData).subscribe(response => {
+      this.shop.shopImage = response.shopImage;
+    });
 
   }
 }

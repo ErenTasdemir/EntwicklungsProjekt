@@ -35,7 +35,7 @@ export class ShopService {
     return this.http.get<Shop>(`http://localhost:8081/shops/${shopId}`);
   }
 
-  saveImageToShop(shopId: number, image: FormData): Observable<Shop> {
+  saveImageToShop(shopId: string, image: FormData): Observable<Shop> {
     return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/upload`, image);
   }
 
