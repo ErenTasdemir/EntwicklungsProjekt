@@ -5,7 +5,7 @@ import { AddComponent } from './add/add.component';
 import {ShopResolverService} from './_resolver/shop-resolver.service';
 
 const appRoutingModule: Routes = [
-  { path: 'home',
+  { path: '',
     component: HomeComponent
   },
   {
