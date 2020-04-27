@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class ShopService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>('http://localhost:8081/shops');
@@ -13,13 +14,13 @@ export class ShopService {
 
   searchShops(query: string): Observable<Shop[]> {
     query = encodeURI(query.replace('&', ' '));
-    return this.http.get<Shop[]>( `http://localhost:8081/shops/search?query=${query}`);
-}
+    return this.http.get<Shop[]>(`http://localhost:8081/shops/search?query=${query}`);
+  }
 
   searchShopsByRadius(query: string, location: string, radius: number): Observable<Shop[]> {
     query = encodeURI(query.replace('&', ' '));
     location = encodeURI(location.replace('&', ' '));
-    return this.http.get<Shop[]>( `http://localhost:8081/shops/search/searchbyradius?query=${query}&location=${location}&radius=${radius}`);
+    return this.http.get<Shop[]>(`http://localhost:8081/shops/search/searchbyradius?query=${query}&location=${location}&radius=${radius}`);
   }
 
   addNewShop(shopName: string, shopType: string, shopLocation: string): Observable<Shop> {

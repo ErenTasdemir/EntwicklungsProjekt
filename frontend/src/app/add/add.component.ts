@@ -34,6 +34,7 @@ export class AddComponent implements OnInit {
     shop.shopName = shopName.value;
     shop.shopType = shopType.value;
     shop.shopLocation = shopLocation.value;
+    this.shop = shop;
     this.signupForm.reset();
     this.shopAdded.emit(shop);
     }

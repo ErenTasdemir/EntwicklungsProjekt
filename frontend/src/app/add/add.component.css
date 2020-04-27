@@ -2,7 +2,7 @@
   margin-top: 50px;
 }
 .shop {
-  width: 20%;
+  width: 25%;
   display: table-cell;
 }
 .sector {
@@ -31,4 +31,13 @@ table {
 }
 input.ng-invalid.ng-touched{
   border: 1px solid red;
+}
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+.dropdown {
+  width: 20%;
+  display: table-cell;
+  padding-right: 5px;
+  padding-left: 5px;
 }

@@ -3,18 +3,10 @@
   <h3>Hier können Sie nach Shops suchen!</h3>
   <hr>
   <p></p>
-
-  <div class="parent radius-search-parent">
-    <div class="child radius-search-child">
-      <label for="query">Suche</label>
-      <input class="form-control" type="text" #query id="query" >
-    </div>
-    <div class="child radius-search-child">
-      <label for="location">Ort</label>
-      <input class="form-" type="text" #location id="location">
-    </div>
-    <div class="child radius-search-child">
-      <mat-slider
+  <div class="list-group">
+    <div class="row-cols-md-2">
+      <input placeholder="Suche" class="form-control" type="text" #query id="query" >
+      <input placeholder="Ort" class="form-control" type="text" #location id="location"><mat-slider style="margin-left: 2em"
         [(ngModel)]="radiusInput"
         thumbLabel
         [displayWith]="formatLabel"
@@ -25,11 +17,6 @@
     </div>
   </div>
   <button class="btn btn-success" type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
-  <button class="btn btn-primary" (click)="openDialog()"><em class="material-icons">add</em></button>
-  <hr>
-  <app-add (shopAdded)="onShopAdded($event)"></app-add>
-  <hr>
-
   <div class="table">
     <div class="table-content">
       <table>
@@ -37,6 +24,7 @@
         <th>Name</th>
         <th>Branche</th>
         <th>Ort</th>
+        <th><button class="btn btn-primary" (click)="openDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
         </thead>
         <tbody>
         <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">

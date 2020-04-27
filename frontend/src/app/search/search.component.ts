@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {combineLatest, Subject} from 'rxjs';
+import {combineLatest, config, Subject} from 'rxjs';
 import {Shop, ShopService} from '../_services/shop.service';
 import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
@@ -80,8 +80,24 @@ export class SearchComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      if (dialogRef.componentInstance.shop != null){
+        const shop = new ShopData();
+        shop.shopName = dialogRef.componentInstance.shop.shopName;
+        shop.shopLocation = dialogRef.componentInstance.shop.shopLocation;
+        shop.shopType = dialogRef.componentInstance.shop.shopType;
+        shop.shopId = dialogRef.componentInstance.shop.shopId;
+        this.shops.push(shop);
+      }
+    });
+  }
+  openShopDialog(shop): void {
+    const dialogRef = this.dialog.open(ShopDialogComponent, {
+      data: {
+        shop
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result : ${result}`);
     });
   }
 

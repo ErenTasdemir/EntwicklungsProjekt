@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -26,7 +26,7 @@ import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
     AddComponent,
     SearchComponent,
     HomeComponent,
-    ShopDialogComponent,
+    ShopDialogComponent
   ],
   imports: [
     BrowserModule,

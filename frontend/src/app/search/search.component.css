@@ -57,7 +57,7 @@ table {
 
 
 .radius-search-parent {
-  display: flex;
+  display: inline-flex;
 }
 .radius-search-child {
   flex: 1;
@@ -73,4 +73,32 @@ table {
   background-color: lightgray;
   cursor: pointer;
 }
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.btn-primary{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.btn-primary:hover{
+  background-color: lightgray;
+}
 
+th {
+  font-size: larger;
+}
+.table thead th {
+  vertical-align: middle;
+}
+
+.radius-search-container {
+  width: 100%;
+  height: 10em;
+  border: 1px solid lightgray;
+}
+
+.list-group {
+
+}
