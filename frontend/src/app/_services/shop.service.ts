@@ -65,5 +65,4 @@ export interface Shop {
   shopName: string;
   shopType: string;
   shopImage ?: any;
-
 }

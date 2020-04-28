@@ -1,43 +1,39 @@
-.row{
-  margin-top: 50px;
+mat-dialog-content {
+  max-width: 100%;
+  min-width: 75vh;
 }
-.shop {
-  width: 25%;
-  display: table-cell;
-}
-.sector {
-  width: 20%;
-  display: table-cell;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-.location {
-  width: 20%;
-  display: table-cell;
-}
-.button {
-  display: table-cell;
-  padding-left: 10px;
-}
-.btn-primary {
-  color: black;
-  background-color: lightgreen;
-  border-color: green;
 
+.image-container {
+  float: left;
+  margin-right: 2em;
+  padding-left: 1em;
 }
-table {
-  width: 100%;
-  margin-top: 50px;
+
+img {
+  max-width: 100% !important;
+  height: auto !important;
 }
-input.ng-invalid.ng-touched{
-  border: 1px solid red;
+
+.details-container {
+  float: right;
 }
-select.ng-invalid.ng-touched {
-  border: 1px solid red;
+
+h4 {
+  font-size: 14px;
+  margin: 0 0.5em 0.75em 0;
 }
-.dropdown {
-  width: 20%;
-  display: table-cell;
-  padding-right: 5px;
-  padding-left: 5px;
+
+p {
+  align-self: center;
+  margin: 0 0.5em 0.75em 0;
+}
+
+.buttons-container {
+  float: right;
+  margin-top: 1em;
+  padding-left: 1em;
+}
+
+.btn-sm {
+  margin: 0.5em;
 }

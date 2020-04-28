@@ -58,6 +58,6 @@ export class ShopDialogComponent implements OnInit {
     this.shopService.saveImageToShop(shopId, uploadImageData).subscribe(response => {
       this.shop.shopImage = response.shopImage;
     });
-
   }
+
 }

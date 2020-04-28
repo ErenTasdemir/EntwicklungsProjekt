@@ -80,15 +80,8 @@ export class SearchComponent implements OnInit {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
-    dialogRef.afterClosed().subscribe(() => {
-      if (dialogRef.componentInstance.shop != null){
-        const shop = new ShopData();
-        shop.shopName = dialogRef.componentInstance.shop.shopName;
-        shop.shopLocation = dialogRef.componentInstance.shop.shopLocation;
-        shop.shopType = dialogRef.componentInstance.shop.shopType;
-        shop.shopId = dialogRef.componentInstance.shop.shopId;
-        this.shops.push(shop);
-      }
+    dialogRef.afterClosed().subscribe(value => {
+      this.shops.push(value);
     });
   }
 

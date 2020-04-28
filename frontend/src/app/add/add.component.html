@@ -1,31 +1,40 @@
-<h3>Hinzufügen von Shops:</h3>
-<div class="container">
-  <div class="row">
-    <form (ngSubmit)="onInsert(shopName, shopType, shopLocation)" #f="ngForm">
-      <div class="shop">
-        <input type="text" id="shopName" placeholder="Name" class="form-control" ngModel name="Name" required #shopName="ngModel">
-        <span class="help-block" *ngIf="!shopName.valid && shopName.touched">Geben Sie einen Namen ein!</span>
+<h1>Shop-Details</h1>
+<mat-dialog-content>
+  <div>
+    <div class="row">
+      <div class="col-4 image-container">
+        <img *ngIf="!shop.shopImage" src="../../assets/images/empty_picture.jpg">
       </div>
-      <div class="sector">
-        <select required class="form-control" id="shopType" name="singleSelect" ngModel="data.singleSelect" #shopType="ngModel">
-          <option disabled selected value="">Branche</option>
-          <option value="Bäckerei">Bäckerei</option>
-          <option value="Textilien">Textilien</option>
-          <option value="Lebensmittel">Lebensmittel</option>
-          <option value="Spielwaren">Spielwaren</option>
-        </select>
-        <span class="help-block" *ngIf="!shopType.value.valid && shopType.touched">Geben Sie eine Branche ein!</span>
+      <div class="col-7 details-container">
+        <div class="row">
+          <h4 class="col-4">Name:</h4>
+          <input type="text" name="shopName" ngModel #shopName="ngModel">
+        </div>
+        <div class="row text-capitalize">
+          <h4 class="col-4">Branche:</h4>
+          <select type="text" class="text-capitalize" ngModel #shopType="ngModel">
+            <option *ngFor="let option of options" value="{{option}}" >{{shopService.replaceInUmlaute(option)}}</option>
+          </select>
+        </div>
+        <div class="row text-capitalize">
+          <h4 class="col-4">Ort:</h4>
+          <input class="text-capitalize" type="text" name="{{shop.shopLocation}}" ngModel #shopLocation="ngModel">
+        </div>
       </div>
-      <div class="location">
-        <input type="text" id="shopLocation" placeholder="Ort" class="form-control" ngModel name="Ort" required #shopLocation="ngModel">
-        <span class="help-block" *ngIf="!shopLocation.valid && shopLocation.touched">Geben Sie einen Ort ein!</span>
+    </div>
+    <div class="row buttons-container">
+      <div>
+        <div class="container row">
+          <div class="col-md-6">
+            <input type="file" (change)="onFileChanged($event)">
+          </div>
+        </div>
       </div>
-      <div class="button">
-        <button class="btn btn-primary" mat-dialog-close="true" type=submit [disabled]="!f.valid">Einfügen</button>
-        <button class="btn btn-danger" mat-dialog-close="true" type="button">Abbrechen</button>
+      <div>
+        <button class="btn-sm btn-group btn-info" (click)="onSave(shopName, shopType, shopLocation)">Speichern</button>
+        <button class="btn-sm btn-group btn-info" (click)="dialogRef.close()">Abbrechen</button>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-
+</mat-dialog-content>
 

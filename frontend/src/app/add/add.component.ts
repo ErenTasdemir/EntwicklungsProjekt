@@ -1,6 +1,8 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
 import {NgForm, NgModel} from '@angular/forms';
 import {Shop, ShopService} from '../_services/shop.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ShopDialogComponentData} from '../shop-dialog/shop-dialog.component';
 
 
 export class ShopData implements Shop{
@@ -21,10 +23,20 @@ export class AddComponent implements OnInit {
   @ViewChild('f', {static: false}) signupForm: NgForm;
 
   submitted = false;
-  shops: ShopData[] = [];
-  shop: Shop;
+  shop = new ShopData();
+  selectedFile: File;
+  image: any;
 
-  constructor(private shopService: ShopService) {
+  options = [
+    'Baeckerei',
+    'Textilien',
+    'Spielwaren',
+    'Lebensmittel'
+  ];
+
+  constructor(public shopService: ShopService,
+              public dialogRef: MatDialogRef<AddComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: ShopDialogComponentData) {
   }
   ngOnInit(): void {
   }
@@ -39,4 +51,31 @@ export class AddComponent implements OnInit {
     this.signupForm.reset();
     this.shopAdded.emit(shop);
     }
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+    this.shop.shopImage = this.selectedFile;
+  }
+
+  onUpload(shopId: string): Shop {
+    let shop = new ShopData();
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.shopService.saveImageToShop(shopId, uploadImageData).subscribe(response => {
+      this.shop.shopImage = response.shopImage;
+      shop = response;
+    });
+    return shop;
+  }
+
+  onSave(shopName: NgModel, shopType: NgModel, shopLocation: NgModel) {
+    this.shop.shopName = shopName.value;
+    this.shop.shopType = shopType.value;
+    this.shop.shopLocation = shopLocation.value;
+    this.shopService.addNewShop(shopName.value, shopType.value, shopLocation.value).subscribe(value => {
+      this.shop = this.onUpload(value.shopId);
+    });
+    this.dialogRef.close(this.shop);
+  }
+
 }
