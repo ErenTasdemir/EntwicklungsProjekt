@@ -100,5 +100,6 @@ th {
 }
 
 .list-group {
-
+  box-sizing: content-box;
+  border: 5px;
 }
