@@ -4,6 +4,7 @@ import com.github.entwicklungsprojekt.user.payload.UserPayload;
 import com.github.entwicklungsprojekt.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,6 +15,8 @@ public class UserController {
 
     private final UserService userService;
 
+    private final BCryptPasswordEncoder passwordEncoder;
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getUser(@PathVariable(name = "id")String id) {
         return ResponseEntity.ok(userService.getUserById(Long.parseLong(id)));
@@ -21,7 +24,8 @@ public class UserController {
 
     @PostMapping(path = "/register")
     public ResponseEntity<?> registerUser(@RequestBody UserPayload payload) {
-        return ResponseEntity.ok(userService.saveUser(payload.getUserName(),payload.getUserName(), payload.getUserLastname(), payload.getUserPassword()));
+
+        return ResponseEntity.ok(userService.saveUser(payload.getUserName(),payload.getUserName(), payload.getUserLastname(), passwordEncoder.encode(payload.getUserPassword())));
     }
 
     @DeleteMapping(path = "/{id}")

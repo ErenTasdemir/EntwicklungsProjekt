@@ -3,21 +3,18 @@ package com.github.entwicklungsprojekt.user.persistence;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "user")
-@Getter
+
 @NoArgsConstructor
+@Getter
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
-    @NotNull
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long userId;
 
     @NotNull
@@ -36,6 +33,14 @@ public class User {
     @Column(name = "user_password")
     String userPassword;
 
+
+    public User(String userUsername, String userName, String userLastname, String userPassword) {
+        this.userUsername = userUsername;
+        this.userName = userName;
+        this.userLastname = userLastname;
+        this.userPassword = userPassword;
+    }
+
     public void setUserUsername(String userUsername) {
         this.userUsername = userUsername;
     }
@@ -51,5 +56,4 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
-
 }

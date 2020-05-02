@@ -1,4 +1,5 @@
 -- drop table if exists shop;
+-- drop table if exists user;
 
 create table if not exists shop (
 
@@ -60,9 +61,9 @@ merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) valu
 (39, 'Eat Like a Horse', 'lebensmittel', 'dortmund, duesseldorf'),
 (40, 'Fair Play', 'spielwaren', 'dortmund, duesseldorf');
 
-merge into user(user_id, user_username, user_name, user_lastname, user_password) key(user_id) values
-(1, 'username1', 'name1', 'lastname1', 'password1'),
-(2, 'username2', 'name2', 'lastname2', 'password2'),
-(3, 'username3', 'name3', 'lastname3', 'password3'),
-(4, 'username4', 'name4', 'lastname4', 'password4'),
-(5, 'username5', 'name5', 'lastname5', 'password5');
+-- merge into user(user_id, user_username, user_name, user_lastname, user_password) key(user_id) values
+-- (1, 'username1', 'name1', 'lastname1', 'password1'),
+-- (2, 'username2', 'name2', 'lastname2', 'password2'),
+-- (3, 'username3', 'name3', 'lastname3', 'password3'),
+-- (4, 'username4', 'name4', 'lastname4', 'password4'),
+-- (5, 'username5', 'name5', 'lastname5', 'password5');
