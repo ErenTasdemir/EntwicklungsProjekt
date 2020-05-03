@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Shop, ShopService} from '../_services/shop.service';
+import {ShopData} from '../add/add.component';
 
 export interface ShopDialogComponentData {
   shop: Shop;
@@ -41,11 +42,11 @@ export class ShopDialogComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.isEditing = false;
   }
 
-  onDelete() {
-
+  onDelete(shopId: string) {
+    this.shopService.deleteShop(shopId);
   }
 
   onFileChanged(event) {

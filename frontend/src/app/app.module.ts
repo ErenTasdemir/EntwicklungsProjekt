@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 
@@ -37,7 +38,8 @@ import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
     MatSliderModule,
     FormsModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    FlexLayoutModule
   ],
 
   providers: [

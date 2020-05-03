@@ -1,29 +1,20 @@
-<!--<div class="row">-->
-<!--  <div class="img-fluid col-4">-->
-<!--    <img  *ngIf="shop.shopImage" style="width: 256px; margin-right: 1em" src="data:image/gif;base64,{{shop.shopImage}}">-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <span>Name</span>-->
-<!--  </div>-->
-<!--</div>-->
-
 <h1>Shop-Details</h1>
 <mat-dialog-content>
   <div *ngIf="data.shop">
     <div class="row">
       <div class="col-4 image-container">
-        <img  *ngIf="shop.shopImage" src="data:image/gif;base64,{{shop.shopImage}}">
+        <img  *ngIf="shop.shopImage" src="data:image/gif;base64,{{shop.shopImage}}" alt="">
       </div>
       <div class="col-7 details-container">
         <div class="row">
           <h4 class="col-4">Name:</h4>
           <p *ngIf="!isEditing">{{shop.shopName}}</p>
-          <input *ngIf="isEditing" type="text" name="{{shop.shopName}}" ngModel="{{shop.shopName}}">
+          <input *ngIf="isEditing" class="text-capitalize" type="text" name="{{shop.shopName}}" ngModel="{{shop.shopName}}">
         </div>
         <div class="row text-capitalize">
           <h4 class="col-4">Branche:</h4>
           <p *ngIf="!isEditing">{{shopService.replaceInUmlaute(shop.shopType)}}</p>
-          <select *ngIf="isEditing" type="text" class="text-capitalize">
+          <select *ngIf="isEditing"  class="text-capitalize">
             <option value="" selected disabled hidden>{{shopService.replaceInUmlaute(shop.shopType)}}</option>
             <option *ngFor="let option of options" value="{{option}}" >{{shopService.replaceInUmlaute(option)}}</option>
           </select>
@@ -37,20 +28,21 @@
     </div>
     <div class="row buttons-container">
       <div *ngIf="isEditing">
-        <div class="container row">
-          <div class="col-md-6">
-            <input type="file" (change)="onFileChanged($event)">
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile02" (change)="onFileChanged($event)">
+              <label class="custom-file-label form-control" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{{selectedFile.name}}</label>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" (click)="onUpload(shop.shopId)">Upload</button>
+            </div>
           </div>
-          <div class="col-md-6">
-            <input type="button" (click)="onUpload(shop.shopId)" value="upload">
-          </div>
-        </div>
       </div>
       <div>
-        <button *ngIf="!isEditing" class="btn-sm btn-group btn-info" (click)="onEdit()">Bearbeiten</button>
-        <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onAccept()">Anwenden</button>
-        <button *ngIf="isEditing" class="btn-sm btn-group btn-info" (click)="onCancel()">Abbrechen</button>
-        <button class="btn-sm btn-group btn-danger" (click)="onDelete()">Löschen</button>
+        <button *ngIf="!isEditing" class="btn btn-info dialog-button" (click)="onEdit()">Bearbeiten</button>
+        <button *ngIf="isEditing" class="btn btn-info dialog-button" (click)="onAccept()">Anwenden</button>
+        <button *ngIf="isEditing" class="btn btn-info dialog-button" (click)="onCancel()">Abbrechen</button>
+        <button class="btn btn-danger dialog-button" (click)="onDelete(shop.shopId)">Löschen</button>
       </div>
     </div>
   </div>

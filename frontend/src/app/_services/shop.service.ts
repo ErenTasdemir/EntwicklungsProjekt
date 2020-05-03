@@ -39,7 +39,9 @@ export class ShopService {
   saveImageToShop(shopId: string, image: FormData): Observable<Shop> {
     return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/upload`, image);
   }
-
+  deleteShop(shopId: string){
+    return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}`, shopId);
+  }
   replaceInUmlaute(str) {
     return str.replace('UE', 'Ü')
       .replace('AE', 'Ä')

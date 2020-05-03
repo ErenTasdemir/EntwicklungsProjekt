@@ -1,45 +1,48 @@
+<h3>Hier können Sie nach Shops suchen!</h3>
+<hr>
 <div class="site-content">
-  <p></p>
-  <h3>Hier können Sie nach Shops suchen!</h3>
-  <hr>
-  <p></p>
-  <div class="list-group offset-3 ">
-    <div id="search-table">
+  <div class="input-box">
+    <div class="search-container">
       <div class="row">
-        <input placeholder="Suche" class="form-control col-6" type="text" #query id="query" >
-      </div>
-      <div class="row">
-        <input placeholder="Ort" class="form-control col-3" type="text" #location id="location">
-        <mat-slider class="col-3"
-                    [(ngModel)]="radiusInput"
-                    thumbLabel
-                    [displayWith]="formatLabel"
-                    tickInterval="1000"
-                    min="0"
-                    max="200">Radius
-        </mat-slider>
-        <button class="btn btn-success" type=submit (click)="sendSearchRequest(query, location, radiusInput)"><em class="material-icons">search</em>Suchen</button>
+        <div class="col-sm-12">
+          <input placeholder="Suche" class="form-control" type="text" #query id="query" >
+        </div>
+        <div class="col-sm-5">
+          <input placeholder="Ort" class="form-control" type="text" #location id="location">
+        </div>
+        <div class="col-sm-4">
+         <mat-slider
+            [(ngModel)]="radiusInput"
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            min="0"
+            max="200">
+           </mat-slider>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn-success btn " type=submit (click)="sendSearchRequest(query, location, radiusInput)"><em class="material-icons">search</em>Suchen</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="table">
-    <div class="table-content">
-      <table>
-        <thead>
-        <th>Name</th>
-        <th>Branche</th>
-        <th>Ort</th>
-        <th><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
-          <td class="text-capitalize"><img  *ngIf="shop.shopImage" style="width: 35px; margin-right: 1em" src="data:image/gif;base64,{{shop.shopImage}}" alt="">{{shopService.replaceInUmlaute(shop.shopName)}}</td>
-          <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
-          <td class="text-capitalize ">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+</div>
+<p></p>
+<div class="table">
+    <table>
+      <thead class="sticky-top">
+      <th id="name">Name</th>
+      <th id="type" >Branche</th>
+      <th id="locate">Ort</th>
+      <th id="add"><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
+      </thead>
+      <tbody class="section">
+      <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
+        <td class="text-capitalize"><img  *ngIf="shop.shopImage" style="width: 35px; margin-right: 1em" src="data:image/gif;base64,{{shop.shopImage}}" alt="">{{shopService.replaceInUmlaute(shop.shopName)}}</td>
+        <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
+        <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
+      </tr>
+      </tbody>
+    </table>
 </div>
 

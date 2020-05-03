@@ -16,10 +16,11 @@ img {
 
 .details-container {
   float: right;
+  font-size: 17px;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: 20px;
   margin: 0 0.5em 0.75em 0;
 }
 
@@ -34,6 +35,10 @@ p {
   padding-left: 1em;
 }
 
-.btn-sm {
-  margin: 0.5em;
+.text-capitalize {
+  border-radius: 3px;
+  font-size: 17px;
+}
+.dialog-button {
+  margin-left: 1em;
 }
