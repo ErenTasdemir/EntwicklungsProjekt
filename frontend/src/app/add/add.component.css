@@ -31,9 +31,11 @@ p {
 .buttons-container {
   float: right;
   margin-top: 1em;
-  padding-left: 1em;
 }
-
-.btn-sm {
-  margin: 0.5em;
+.btn-info{
+  margin-left: 1em;
+}
+.text-capitalize {
+  border-radius: 5px;
+  font-size: 17px;
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {combineLatest, Subject} from 'rxjs';
 import {Shop, ShopService} from '../_services/shop.service';
 import {ActivatedRoute} from '@angular/router';
@@ -13,7 +13,7 @@ import {ShopDialogComponent} from '../shop-dialog/shop-dialog.component';
   styleUrls: ['./search.component.css'],
   providers: [ShopService]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   shops: Shop[] = [];
 
   sendSearch = new EventEmitter<string>();
@@ -80,8 +80,10 @@ export class SearchComponent implements OnInit {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
-    dialogRef.afterClosed().subscribe(value => {
-      this.shops.push(value);
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(value => {
+      if (value) {
+        this.shops.push(value);
+      }
     });
   }
 
@@ -91,11 +93,23 @@ export class SearchComponent implements OnInit {
         shop
       }
     });
-    dialogRef.afterClosed().subscribe(value => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(value => {
       if (value) {
-        const i = this.shops.indexOf(value.shopId);
-        this.shops.splice(i, 1, value);
+        const i = this.shops.indexOf(value[0]);
+        console.log(i);
+        if (value[1] === 'delete') {
+          this.shops.splice(i, 1);
+        }
+        console.log(value);
+        if (value[1] === 'edit') {
+          this.shops.splice(i, 1, value[0]);
+        }
       }
     });
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.unsubscribe();
+  }
+
 }

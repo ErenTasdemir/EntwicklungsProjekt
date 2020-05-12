@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -39,9 +39,20 @@ export class ShopService {
   saveImageToShop(shopId: string, image: FormData): Observable<Shop> {
     return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/upload`, image);
   }
-  deleteShop(shopId: string){
-    return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}`, shopId);
+
+  deleteShop(shopId: string): Observable<Shop>{
+    return this.http.delete<Shop>(`http://localhost:8081/shops/${shopId}/delete`);
   }
+
+  editShop(shopName: string, shopType: string, shopLocation: string, shopId: string): Observable<Shop> {
+    const body = {
+      shopName,
+      shopType,
+      shopLocation
+    };
+    return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/edit`, body);
+  }
+
   replaceInUmlaute(str) {
     return str.replace('UE', 'Ü')
       .replace('AE', 'Ä')

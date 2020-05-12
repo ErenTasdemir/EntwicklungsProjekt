@@ -4,7 +4,7 @@
   /*border: 1px solid darkred;*/
   vertical-align: auto;
   height: calc(1.5em + 0.75rem + 2px);
-
+  width: 100%;
 }
 ::ng-deep .mat-slider-horizontal {
   width: 100%;
@@ -12,16 +12,12 @@
 ::ng-deep .mat-slider-thumb {
   background-color: lightgray !important;
 }
-
 ::ng-deep .mat-slider {
   color: lightgray;
 }
-
 ::ng-deep .mat-slider-track-background  {
   background-color: lightgray !important;
 }
-
-
 /* CSS to change 'Primary' color */
 
 ::ng-deep .mat-accent .mat-slider-thumb {
@@ -33,6 +29,9 @@
 ::ng-deep .mat-accent .mat-slider-track-fill {
   background-color: lightgray;
 }
+
+
+
 .show-table:hover {
   background-color: lightgray;
   cursor: pointer;
@@ -49,37 +48,41 @@
 .btn-primary:hover{
   background-color: lightgray;
 }
-.input-box {
-  /*display: grid;*/
-  /*flex-direction: row;*/
-  border: 1px solid lightgray;
-  border-radius: 8px;
-}
 .site-content {
-  margin: 5em 30em;
-}
-.search-container {
-  margin: 3em 10em;
+  /*width: 45%;*/
+  /*margin-left: 28%;*/
 }
 h3 {
-  margin: 1em;
+  margin: 1.5em;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+.search-box-content {
+  margin: 2em;
 }
 .btn-success {
+  min-width: 10%;
   float: right;
 }
 .form-control {
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
+
+
 
 .sticky-top {
   background-color: white;
   border-radius: 0.5em;
   box-shadow: 0 0 0 1px lightgray;
-
-
 }
 table thead th{
- vertical-align: middle;
+  vertical-align: middle;
   font-size: larger;
 }
 th {
@@ -88,11 +91,14 @@ th {
   background: white;
 }
 table {
-  width: 60%;
-  margin-left: 20%;
+  /*width: 70%;*/
+  /*margin-left: 15%;*/
 
 }
-.section {
+.section-content {
   border-radius: 0.5em;
   box-shadow: 0 0 0 1px lightgray;
+}
+#add-button{
+ float: right;
 }

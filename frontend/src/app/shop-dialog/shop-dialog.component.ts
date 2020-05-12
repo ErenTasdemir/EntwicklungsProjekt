@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Shop, ShopService} from '../_services/shop.service';
-import {ShopData} from '../add/add.component';
+import {NgModel} from '@angular/forms';
 
 export interface ShopDialogComponentData {
   shop: Shop;
@@ -10,13 +10,12 @@ export interface ShopDialogComponentData {
 @Component({
   selector: 'app-shop-dialog',
   templateUrl: './shop-dialog.component.html',
-  styleUrls: ['./shop-dialog.component.css']
+  styleUrls: ['./shop-dialog.component.css'],
 })
 export class ShopDialogComponent implements OnInit {
+
   shop: Shop;
   isEditing = false;
-
-  selectedFile: File;
 
   options = [
     'Baeckerei',
@@ -27,7 +26,8 @@ export class ShopDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ShopDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ShopDialogComponentData,
-              public shopService: ShopService ) { }
+              public shopService: ShopService) {
+  }
 
   ngOnInit(): void {
     this.shop = this.data.shop;
@@ -37,28 +37,24 @@ export class ShopDialogComponent implements OnInit {
     this.isEditing = true;
   }
 
-  onAccept() {
+  onAccept(shopName: NgModel, shopType: NgModel, shopLocation: NgModel) {
+    this.shop.shopName = shopName.value;
+    this.shop.shopType = shopType.value;
+    this.shop.shopLocation = shopLocation.value;
+    console.log(this.shop.shopName, this.shop.shopType, this.shop.shopLocation);
+    this.shopService.editShop(shopName.value, shopType.value, shopLocation.value, this.shop.shopId).subscribe(value => {
+      console.log(value);
+      this.dialogRef.close([this.shop, 'edit']);
+    });
+    }
 
-  }
-
-  onCancel() {
-    this.isEditing = false;
-  }
 
   onDelete(shopId: string) {
-    this.shopService.deleteShop(shopId);
-  }
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  onUpload(shopId: string) {
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.shopService.saveImageToShop(shopId, uploadImageData).subscribe(response => {
-      this.shop.shopImage = response.shopImage;
-    });
+    shopId = this.shop.shopId;
+    this.shopService.deleteShop(shopId).subscribe(value => {}
+    );
+    this.dialogRef.close([this.shop, 'delete'] );
+    console.log(shopId + ' is deleted');
   }
 
 }

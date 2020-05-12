@@ -36,9 +36,14 @@ p {
 }
 
 .text-capitalize {
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 17px;
+
 }
 .dialog-button {
   margin-left: 1em;
+}
+.btn-secondary:focus {
+  background-color: lightgreen;
+  color: black;
 }

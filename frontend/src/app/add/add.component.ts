@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
-import {NgForm, NgModel} from '@angular/forms';
+import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output} from '@angular/core';
+import {NgModel} from '@angular/forms';
 import {Shop, ShopService} from '../_services/shop.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ShopDialogComponentData} from '../shop-dialog/shop-dialog.component';
@@ -17,14 +17,10 @@ export class ShopData implements Shop{
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnInit, OnDestroy {
   @Output() shopAdded = new EventEmitter<ShopData>();
 
-  @ViewChild('f', {static: false}) signupForm: NgForm;
-
-  submitted = false;
   shop = new ShopData();
-  selectedFile: File;
   image: any;
 
   options = [
@@ -38,43 +34,18 @@ export class AddComponent implements OnInit {
               public dialogRef: MatDialogRef<AddComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ShopDialogComponentData) {
   }
-  ngOnInit(): void {
-  }
 
-  onInsert(shopName: NgModel, shopType: NgModel, shopLocation: NgModel ){
-    this.submitted = true;
-    const shop = new ShopData();
-    shop.shopName = shopName.value;
-    shop.shopType = shopType.value;
-    shop.shopLocation = shopLocation.value;
-    this.shop = shop;
-    this.signupForm.reset();
-    this.shopAdded.emit(shop);
+  ngOnDestroy(): void {
     }
 
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    this.shop.shopImage = this.selectedFile;
-  }
-
-  onUpload(shopId: string): Shop {
-    let shop = new ShopData();
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.shopService.saveImageToShop(shopId, uploadImageData).subscribe(response => {
-      this.shop.shopImage = response.shopImage;
-      shop = response;
-    });
-    return shop;
+  ngOnInit(): void {
   }
 
   onSave(shopName: NgModel, shopType: NgModel, shopLocation: NgModel) {
     this.shop.shopName = shopName.value;
     this.shop.shopType = shopType.value;
     this.shop.shopLocation = shopLocation.value;
-    this.shopService.addNewShop(shopName.value, shopType.value, shopLocation.value).subscribe(value => {
-      this.shop = this.onUpload(value.shopId);
-    });
+    this.shopService.addNewShop(shopName.value, shopType.value, shopLocation.value).subscribe(value => {});
     this.dialogRef.close(this.shop);
   }
 
