@@ -27,12 +27,7 @@ public class OpenstreetmapLocation {
     private Double longitude;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "shop_location",
-            joinColumns = @JoinColumn(name = "location_id"),
-            inverseJoinColumns = @JoinColumn(name = "shop_id")
-    )
+    @ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER)
     private Set<Shop> shops;
 
     public void addShop(Shop shop) {
