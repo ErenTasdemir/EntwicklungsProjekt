@@ -4,6 +4,7 @@ mat-dialog-content {
 }
 .details-container {
   float: right;
+  font-size: 17px;
 }
 
 h4 {
@@ -17,13 +18,19 @@ p {
 }
 
 .buttons-container {
-  float: right;
   margin-top: 1em;
+  float: right;
 }
-.btn-info{
+.dialog-button{
   margin-left: 1em;
 }
 .text-capitalize {
   border-radius: 5px;
   font-size: 17px;
+}
+input {
+  margin: 0.1em;
+}
+select {
+  margin: 0.1em;
 }

@@ -2,7 +2,7 @@ package com.github.entwicklungsprojekt.shop.projection;
 
 import org.springframework.beans.factory.annotation.Value;
 
-public interface ShopProjection {
+public interface ShopProjectionWithoutPicture {
 
     Long getShopId();
 

@@ -1,56 +1,103 @@
-.example-container {
-  height: 400px;
-  overflow: auto;
-}
-table {
-  width: 100%;
-}
-.mat-table {
-  background: whitesmoke;
-}
- .mat-header-cell{
-   color: black;
-   font-size: 1.5em;
- }
-.mat-cell {
-  color: black;
-}
-
-.form-control-range {
-  width: 30%;
-  display: block;
-}
-
 ::ng-deep mat-slider {
   /*background: #131a66 !important;*/
-  width: 300px;
   border-radius: 5px;
   /*border: 1px solid darkred;*/
-  vertical-align: middle;
+  vertical-align: auto;
   height: calc(1.5em + 0.75rem + 2px);
+  width: 100%;
 }
-
+::ng-deep .mat-slider-horizontal {
+  width: 100%;
+}
 ::ng-deep .mat-slider-thumb {
-  background-color: #c4b9a2 !important;
+  background-color: lightgray !important;
 }
-
 ::ng-deep .mat-slider {
-  color: #c4b9a2;
+  color: lightgray;
 }
-
 ::ng-deep .mat-slider-track-background  {
-  background-color: #c4b9a2 !important;
+  background-color: lightgray !important;
 }
-
-
 /* CSS to change 'Primary' color */
 
 ::ng-deep .mat-accent .mat-slider-thumb {
-  background-color: #c4b9a2;
+  background-color: lightgray;
 }
 ::ng-deep .mat-accent .mat-slider-thumb-label {
-  background-color: #c4b9a2;
+  background-color: lightgray;
 }
 ::ng-deep .mat-accent .mat-slider-track-fill {
-  background-color: #c4b9a2;
+  background-color: lightgray;
+}
+
+
+
+.show-table:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.btn-primary{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.btn-primary:hover{
+  background-color: lightgray;
+}
+.site-content {
+}
+h3 {
+  margin: 1.5em;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+.search-box-content {
+  margin: 2em;
+}
+.btn-success {
+  min-width: 10%;
+  float: right;
+}
+.form-control {
+  margin-bottom: 1em;
+}
+
+
+
+.sticky-top {
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 0 0 0 1px lightgray;
+}
+table thead th{
+  vertical-align: middle;
+  font-size: larger;
+}
+th {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+table {
+
+}
+.section-content {
+  border-radius: 0.5em;
+  box-shadow: 0 0 0 1px lightgray;
+}
+#add-button{
+ float: right;
+}
+#locate {
+  position: relative;
 }

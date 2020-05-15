@@ -1,48 +1,46 @@
+<h3>Hier können Sie nach Shops suchen!</h3>
+<hr>
 <div class="site-content">
-  <p></p>
-  <h3>Hier können Sie nach Shops suchen!</h3>
-  <hr>
-  <p></p>
-
-  <div class="col-md-3">
-    <div class="query-search">
-      <label for="query">Suche</label>
-      <input type="text" #query id="query">
+  <div class="search-box offset-3 col-6">
+    <div class="search-box-content">
+      <input placeholder="Suche" class="form-control" type="text" #query id="query" >
+      <div class="row">
+        <div class="col-sm-4">
+          <input placeholder="Ort" class="form-control" type="text" #location id="location">
+        </div>
+        <div class="col-sm-5">
+          <mat-slider
+            [(ngModel)]="radiusInput"
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            min="0"
+            max="200">
+          </mat-slider>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn-success btn " type=submit (click)="sendSearchRequest(query, location, radiusInput)"><em class="material-icons">search</em>Suchen</button>
+        </div>
+      </div>
     </div>
-    <div class="radius-search">
-      <label for="location">Ort</label>
-      <input type="text" #location id="location">
-      <mat-slider
-        [(ngModel)]="radiusInput"
-        thumbLabel
-        [displayWith]="formatLabel"
-        tickInterval="1000"
-        min="0"
-        max="200">Radius
-      </mat-slider>
-    </div>
-
-
-    <button type=submit (click)="sendSearchRequest(query, location, radiusInput)">Senden</button>
   </div>
-
   <div class="table">
-    <div class="table-content">
-      <table>
-        <thead>
-        <th>Name</th>
-        <th>Branche</th>
-        <th>Ort</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let shop of shops">
-          <td class="text-capitalize">{{replaceInUmlaute(shop.shopName)}}</td>
-          <td class="text-capitalize">{{replaceInUmlaute(shop.shopType)}}</td>
-          <td class="text-capitalize text-">{{replaceInUmlaute(shop.shopLocation)}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="offset-2 col-8">
+      <thead class="sticky-top">
+      <th  id="name">Name</th>
+      <th  id="type" >Branche</th>
+      <th  id="locate">Ort<button id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
+
+<!--      <th  id="add"><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>-->
+      </thead>
+      <tbody class="section-content">
+      <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
+        <td class="text-capitalize">
+          {{shopService.replaceInUmlaute(shop.shopName)}}</td>
+        <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
+        <td class="text-capitalize">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-

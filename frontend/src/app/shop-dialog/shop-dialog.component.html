@@ -1,0 +1,60 @@
+<h1>Shop-Details</h1>
+<mat-dialog-content>
+  <div *ngIf="data.shop">
+<!--    If not editing mode-->
+    <div *ngIf="!isEditing">
+      <div class="row">
+        <div class="col-7 details-container">
+          <div class="row text-capitalize">
+            <h4 class="col-4">Name:</h4>
+            <p>{{shop.shopName}}</p>
+          </div>
+          <div class="row text-capitalize">
+            <h4 class="col-4">Branche:</h4>
+            <p>{{shopService.replaceInUmlaute(shop.shopType)}}</p>
+          </div>
+          <div class="row text-capitalize">
+            <h4 class="col-4">Ort:</h4>
+            <p>{{shopService.replaceInUmlaute(shop.shopLocation)}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row buttons-container">
+        <div>
+          <button class="btn btn-group btn-info dialog-button" (click)="onEdit()">Bearbeiten</button>
+          <button class="btn btn-group btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <!--    If editing mode-->
+    <div *ngIf="isEditing">
+      <div class="row">
+        <div class="col-7 details-container">
+          <div class="row">
+            <h4 class="col-4">Name:</h4>
+            <input class="text-capitalize" type="text" name="{{shop.shopName}}" ngModel="{{shop.shopName}}" #shopName="ngModel">
+          </div>
+          <div class="row">
+            <h4 class="col-4">Branche:</h4>
+            <select class="text-capitalize" ngModel #shopType="ngModel">
+              <option value="" selected disabled hidden>{{shopService.replaceInUmlaute(shop.shopType)}}</option>
+              <option *ngFor="let option of options" value="{{option}}" >{{shopService.replaceInUmlaute(option)}}</option>
+            </select>
+          </div>
+          <div class="row">
+            <h4 class="col-4">Ort:</h4>
+            <input class="text-capitalize" type="text" name="{{shop.shopLocation}}" ngModel="{{shop.shopLocation}}" #shopLocation="ngModel">
+          </div>
+        </div>
+      </div>
+      <div class="row buttons-container">
+        <div>
+          <button *ngIf="isEditing" class="btn btn-info dialog-button" (click)="onAccept(shopName, shopType, shopLocation )">Anwenden</button>
+          <button class="btn btn-danger dialog-button " (click)="onDelete(shop.shopId)">Löschen</button>
+          <button class="btn btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

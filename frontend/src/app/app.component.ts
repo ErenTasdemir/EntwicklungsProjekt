@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router, RouterEvent} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +7,7 @@ import {Router, RouterEvent} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('ShopBoss');
+  }
 }
