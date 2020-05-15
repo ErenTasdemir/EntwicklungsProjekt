@@ -9,14 +9,14 @@ create table if not exists shop (
     shop_location varchar(255) not null
 );
 
-create table if not exists user (
-
-    user_id bigint(20) auto_increment not null primary key,
-    user_username varchar(255) not null,
-    user_name varchar(255) not null,
-    user_lastname varchar(255) not null,
-    user_password varchar(255) not null
-);
+--create table if not exists user (
+--
+--    user_id bigint(20) auto_increment not null primary key,
+--    user_username varchar(255) not null,
+--    user_name varchar(255) not null,
+--    user_lastname varchar(255) not null,
+--    user_password varchar(255) not null
+--);
 
 
 merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) values

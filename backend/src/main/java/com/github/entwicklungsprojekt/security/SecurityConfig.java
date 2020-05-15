@@ -1,15 +1,19 @@
 package com.github.entwicklungsprojekt.security;
 
+import com.github.entwicklungsprojekt.security.jwt.JwtTokenProvider;
+import com.github.entwicklungsprojekt.security.jwt.config.JwtConfigurer;
 import com.github.entwicklungsprojekt.user.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -18,11 +22,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MyUserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
-    public SecurityConfig(MyUserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
+    public SecurityConfig(MyUserDetailsService userDetailsService,BCryptPasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -32,24 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .httpBasic()
+        http
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/errors")
-                .permitAll()
-                .antMatchers("/error/**")
-                .permitAll()
-                .antMatchers("/h2-console")
-                .permitAll()
-                .antMatchers("/h2-console/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/users/register")
-                .permitAll()
-                .antMatchers( "/users", "/shops")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/auth/signin").permitAll()
+                .antMatchers("/errors").permitAll()
+                .antMatchers("/error/**").permitAll()
+                .antMatchers("/h2-console").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers( "/users", "/shops").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/register").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
     }
 
     @Override

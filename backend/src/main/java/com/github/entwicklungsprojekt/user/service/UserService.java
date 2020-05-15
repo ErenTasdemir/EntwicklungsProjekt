@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -14,33 +16,34 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getUserById(Long id) {
-        return userRepository.findByUserId(id).orElseThrow(UserNotFoundException::new);
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUserUsername(username).orElseThrow(UserNotFoundException::new);
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
     @Transactional
-    public User saveUser(String userUsername,String userName, String userLastname, String userPassword) {
-        User user = new User();
-        user.setUserUsername(userUsername);
-        user.setUserName(userName);
-        user.setUserLastname(userLastname);
-        user.setUserPassword(userPassword);
-        userRepository.save(user);
+    public User saveUser(String userUsername,String userFirstname, String userLastname, String userPassword) {
+        userRepository.save(User.builder()
+        .username(userUsername)
+        .password(userPassword)
+        .roles(Arrays.asList("ROLE_USER"))
+        .userFirstname(userFirstname)
+        .userLastname(userLastname)
+        .build());
 
-        return user;
+        return userRepository.findByUsername(userUsername).orElseThrow(UserNotFoundException::new);
     }
 
     public User deleteUser(Long userId) {
-        User user = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         userRepository.delete(user);
 
         return user;
     }
 
     public boolean existsByUsername(String username) {
-        return userRepository.existsByUserUsername(username);
+        return userRepository.existsByUsername(username);
     }
 }

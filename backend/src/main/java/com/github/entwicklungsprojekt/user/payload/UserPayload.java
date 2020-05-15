@@ -13,7 +13,7 @@ public class UserPayload {
 
     String userUsername;
 
-    String userName;
+    String userFirstname;
 
     String userLastname;
 
