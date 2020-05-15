@@ -2,24 +2,12 @@ mat-dialog-content {
   max-width: 100%;
   min-width: 75vh;
 }
-
-.image-container {
-  float: left;
-  margin-right: 2em;
-  padding-left: 1em;
-}
-
-img {
-  max-width: 100% !important;
-  height: auto !important;
-}
-
 .details-container {
   float: right;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: 20px;
   margin: 0 0.5em 0.75em 0;
 }
 

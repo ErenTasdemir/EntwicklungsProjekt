@@ -49,8 +49,6 @@
   background-color: lightgray;
 }
 .site-content {
-  /*width: 45%;*/
-  /*margin-left: 28%;*/
 }
 h3 {
   margin: 1.5em;
@@ -91,8 +89,6 @@ th {
   background: white;
 }
 table {
-  /*width: 70%;*/
-  /*margin-left: 15%;*/
 
 }
 .section-content {
@@ -101,4 +97,7 @@ table {
 }
 #add-button{
  float: right;
+}
+#locate {
+  position: relative;
 }

@@ -4,12 +4,12 @@
 .navbar {
   padding: 1em;
   padding-left: 0.5em;
-  background-color: rgba(255, 235, 205, 0.55);
+  background-color: rgb(123, 121, 121);
 }
 
 .navbar a{
   padding: 0.5em 0.5em;
-  color: #131a66;
+  color: #000000;
   margin: 0.5em 0.5em;
 }
 

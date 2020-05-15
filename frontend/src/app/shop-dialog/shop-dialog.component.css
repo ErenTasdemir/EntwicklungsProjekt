@@ -2,18 +2,6 @@ mat-dialog-content {
   max-width: 100%;
   min-width: 75vh;
 }
-
-.image-container {
-  float: left;
-  margin-right: 2em;
-  padding-left: 1em;
-}
-
-img {
-  max-width: 100% !important;
-  height: auto !important;
-}
-
 .details-container {
   float: right;
   font-size: 17px;
@@ -30,20 +18,19 @@ p {
 }
 
 .buttons-container {
-  float: right;
   margin-top: 1em;
-  padding-left: 1em;
+  float: right;
 }
-
+.dialog-button{
+  margin-left: 1em;
+}
 .text-capitalize {
   border-radius: 5px;
   font-size: 17px;
-
 }
-.dialog-button {
-  margin-left: 1em;
+input {
+  margin: 0.1em;
 }
-.btn-secondary:focus {
-  background-color: lightgreen;
-  color: black;
+select {
+  margin: 0.1em;
 }
