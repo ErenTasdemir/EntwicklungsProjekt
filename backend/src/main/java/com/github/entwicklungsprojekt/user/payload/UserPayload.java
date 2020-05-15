@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserPayload {
 
-    String userUsername;
+    String username;
 
-    String userFirstname;
+    String name;
 
-    String userLastname;
+    String lastname;
 
-    String userPassword;
+    String password;
 
 }

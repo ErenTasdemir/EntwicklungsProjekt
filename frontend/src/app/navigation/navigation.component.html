@@ -3,7 +3,9 @@
   <div class="button">
     <a routerLink="home" routerLinkActive="active">Home</a>
     <a routerLink="search-shop">Search Shop</a>
-    <a routerLink="add-shop">Add Shop</a>
+    <a routerLink="profile">Mein Profil</a>
+    <a *ngIf="!isAuthenticated" routerLink="auth">Einloggen</a>
+    <a *ngIf="isAuthenticated" (click)="onLogout()" routerLink="auth">Ausloggen</a>
   </div>
 </nav>
 <router-outlet></router-outlet>

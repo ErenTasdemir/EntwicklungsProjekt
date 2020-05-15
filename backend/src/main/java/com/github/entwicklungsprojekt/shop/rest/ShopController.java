@@ -17,12 +17,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shops")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ShopController {
 
     private final ShopService shopService;
-
     private final ProjectionFactory projectionFactory;
-
     private final HibernateSearchService shopSearchService;
 
     @Autowired
