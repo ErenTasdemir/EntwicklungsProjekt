@@ -8,3 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 1em 5em 10em 1.5em;
   padding: 0.5em 1em 0.5em 0.5em;
 }
+.site {
+  background-image: url('src/assets/images/background-image.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: auto;
+  height: 100%;
+}

@@ -10,30 +10,30 @@
   width: 100%;
 }
 ::ng-deep .mat-slider-thumb {
-  background-color: lightgray !important;
+  background-color: white !important;
 }
 ::ng-deep .mat-slider {
-  color: lightgray;
+  color: white;
 }
 ::ng-deep .mat-slider-track-background  {
-  background-color: lightgray !important;
+  background-color: white!important;
 }
 /* CSS to change 'Primary' color */
 
 ::ng-deep .mat-accent .mat-slider-thumb {
-  background-color: lightgray;
+  background-color: white;
 }
 ::ng-deep .mat-accent .mat-slider-thumb-label {
-  background-color: lightgray;
+  background-color: white;
 }
 ::ng-deep .mat-accent .mat-slider-track-fill {
-  background-color: lightgray;
+  background-color: white;
 }
 
 
 
 .show-table:hover {
-  background-color: lightgray;
+  background-color: rgba(255, 255, 255, 0.27);;
   cursor: pointer;
 }
 .material-icons {
@@ -46,10 +46,9 @@
   border-color: white;
 }
 .btn-primary:hover{
-  background-color: lightgray;
+  background-color: gray;
 }
-.site-content {
-}
+
 h3 {
   margin: 1.5em;
 }
@@ -57,9 +56,9 @@ h3 {
 .search-box {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgray;
   border-radius: 8px;
   margin-bottom: 2em;
+  background-color: rgba(112, 128, 144, 0.93);
 }
 .search-box-content {
   margin: 2em;
@@ -75,29 +74,34 @@ h3 {
 
 
 .sticky-top {
-  background-color: white;
-  border-radius: 0.5em;
-  box-shadow: 0 0 0 1px lightgray;
+  background-color: lightgray;
+  box-shadow: 0 0 0 2px lightgray;
 }
 table thead th{
   vertical-align: middle;
   font-size: larger;
+  border-bottom: 0px;
 }
 th {
-  position: sticky;
-  top: 0;
-  background: white;
+  position: sticky !important;
+  top: 0 !important;
+  background: rgba(255, 255, 255, 0.42);
 }
-table {
-
+thead {
+  border: 2px solid slategray;
+  border-radius: 0.5em !important;
 }
 .section-content {
-  border-radius: 0.5em;
-  box-shadow: 0 0 0 1px lightgray;
+  border-radius: 0.5em !important;
+  border: 2px solid slategray;
+  background-color: rgba(112, 128, 144, 0.93);
 }
 #add-button{
  float: right;
 }
 #locate {
   position: relative;
+}
+.table-text{
+  color: snow;
 }
