@@ -1,6 +1,7 @@
 mat-dialog-content {
   max-width: 100%;
   min-width: 75vh;
+
 }
 .details-container {
   float: right;
@@ -26,4 +27,7 @@ p {
 .text-capitalize {
   border-radius: 5px;
   font-size: 17px;
+}
+::ng-deep mat-dialog-container {
+  background-color: pink !important;
 }

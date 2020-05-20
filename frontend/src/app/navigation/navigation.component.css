@@ -1,16 +1,22 @@
 .button {
   margin-left: auto;
 }
+.button-content {
+  border-radius: 0.5em;
+  border: 2px white;
+}
 .navbar {
+  min-height: 10vh;
   padding: 1em;
   padding-left: 0.5em;
-  background-color: rgb(123, 121, 121);
+  background-color: rgba(112, 128, 144, 0.93);
 }
 
 .navbar a{
   padding: 0.5em 0.5em;
-  color: #000000;
+  color: snow;
   margin: 0.5em 0.5em;
+  font-size: larger;
 }
 
 .navbar-brand {
@@ -18,4 +24,27 @@
   margin: 0.2em !important;
   background-color: rgba(105, 105, 105, 0.11);
 }
+
+/*.navigation {*/
+/*  background-image: url('src/assets/images/navbar-image.jpg');*/
+/*  min-height: 25vh;*/
+/*  background-size: contain;*/
+/*  background-position: center;*/
+/*  position: relative;*/
+/*}*/
+/*!*.container{*!*/
+/*!*  width: auto;*!*/
+/*!*}*!*/
+/*.navigation-contents {*/
+/*  background-color: lightgray;*/
+/*  border-radius: 5px;*/
+/*  width: 20%;*/
+/*  margin-left: auto;*/
+/*  font-size: 17px;*/
+/*  text-align: center;*/
+/*}*/
+/*.navigation-contents a{*/
+/*  margin-left: 0.5em;*/
+/*}*/
+
 
