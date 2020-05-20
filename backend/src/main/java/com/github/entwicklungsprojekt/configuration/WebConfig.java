@@ -1,6 +1,5 @@
 package com.github.entwicklungsprojekt.configuration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -15,6 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
         // allow CORS on all paths
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "DELETE", "OPTIONS", "PUT", "PATCH");
+                .allowedMethods("GET", "POST", "DELETE", "OPTIONS");
     }
 }
