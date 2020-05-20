@@ -1,4 +1,5 @@
 -- drop table if exists shop;
+-- drop table if exists user;
 
 create table if not exists shop (
 
@@ -8,6 +9,7 @@ create table if not exists shop (
     shop_location varchar(255) not null,
     shop_image image
 );
+
 
 
 merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) values
