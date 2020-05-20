@@ -14,11 +14,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { AuthComponent } from './auth/auth.component';
-import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.component';
-import {AuthInterceptorService} from './auth/auth-interceptor.service';
-import { ProfileComponent } from './profile/profile.component';
-
 import {MatDialogModule} from '@angular/material/dialog';
 import {ShopDialogComponent} from './shop-dialog/shop-dialog.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -30,10 +25,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     NavigationComponent,
     AddComponent,
     SearchComponent,
-    HomeComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
-    ProfileComponent
     HomeComponent,
     ShopDialogComponent
   ],
@@ -51,12 +42,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
 
   providers: [
-    ShopService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    }
+    ShopService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,9 +13,6 @@
   <div class="button">
     <a routerLink="search-shop">Search Shop</a>
     <a routerLink="login">Login</a>
-    <a routerLink="profile">Mein Profil</a>
-    <a *ngIf="!isAuthenticated" routerLink="auth">Einloggen</a>
-    <a *ngIf="isAuthenticated" (click)="onLogout()" routerLink="auth">Ausloggen</a>
   </div>
 </nav>
 <router-outlet></router-outlet>

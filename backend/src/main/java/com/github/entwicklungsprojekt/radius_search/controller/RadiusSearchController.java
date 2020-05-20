@@ -1,4 +1,4 @@
-package com.github.entwicklungsprojekt.radius_search.rest;
+package com.github.entwicklungsprojekt.radius_search.controller;
 
 import com.github.entwicklungsprojekt.radius_search.service.RadiusSearchService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
