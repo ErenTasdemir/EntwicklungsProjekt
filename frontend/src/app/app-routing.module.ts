@@ -8,7 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {AuthGuard} from './auth/auth.guard';
 
 const appRoutingModule: Routes = [
-  { path: 'home',
+  { path: '',
     component: HomeComponent
   },
   {
