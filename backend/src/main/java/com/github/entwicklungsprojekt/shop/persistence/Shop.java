@@ -37,17 +37,8 @@ public class Shop {
     @Field
     String shopLocation;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "shop_image")
-    private byte[] shopImage;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "shop_location",
-            joinColumns = @JoinColumn(name = "location_id"),
-            inverseJoinColumns = @JoinColumn(name = "shop_id")
-    )    Set<OpenstreetmapLocation> locations;
+    @ManyToMany(mappedBy = "shops", fetch = FetchType.EAGER)
+    Set<OpenstreetmapLocation> locations;
 
     public Shop(String shopName, String shopLocation, String shopType) {
         this.shopName = shopName;
@@ -71,7 +62,5 @@ public class Shop {
         this.locations = locations;
     }
 
-    public void setShopImage(byte[] shopImage) {
-        this.shopImage = shopImage;
-    }
+
 }
