@@ -3,8 +3,7 @@ package com.github.entwicklungsprojekt.shop.service;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
-import com.github.entwicklungsprojekt.shop.projection.ShopProjectionWithPicture;
-import com.github.entwicklungsprojekt.shop.projection.ShopProjectionWithoutPicture;
+import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
 import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +17,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShopServiceTest {
+
+    private final ShopProjection shopProjectionMock = Mockito.mock(ShopProjection.class);
 
     private final Shop shopMock = Mockito.mock(Shop.class);
 
@@ -40,12 +42,12 @@ public class ShopServiceTest {
     @Test
     public void getAllAvailibleShopsShouldReturnAllShops() {
         //given
-        List<Shop> expectedList = new ArrayList<>();
-        expectedList.add(shopMock);
-        given(shopRepositoryMock.findAll()).willReturn(expectedList);
+        List<ShopProjection> expectedList = new ArrayList<>();
+        expectedList.add(shopProjectionMock);
+        given(shopRepositoryMock.findAllProjectedBy()).willReturn(expectedList);
 
         //when
-        List<Shop> actualList = shopService.getAllAvailibleShops();
+        List<ShopProjection> actualList = shopService.getAllAvailibleShops();
 
         //then
         assertThat(actualList).isEqualTo(expectedList);
@@ -88,7 +90,7 @@ public class ShopServiceTest {
         given(shopRepositoryMock.getOne(id)).willReturn(shopMock);
 
         //when
-        Shop actualShop = shopService.getShopWithPictureById(id);
+        Shop actualShop = shopService.getShopById(id);
 
         //then
         assertThat(actualShop).isEqualTo(shopMock);

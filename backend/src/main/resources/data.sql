@@ -1,13 +1,22 @@
 -- drop table if exists shop;
+-- drop table if exists user;
 
 create table if not exists shop (
 
     shop_id bigint(20) auto_increment not null primary key,
     shop_name varchar(255) not null,
     shop_type varchar(255) not null,
-    shop_location varchar(255) not null,
-    shop_image image
+    shop_location varchar(255) not null
 );
+
+--create table if not exists user (
+--
+--    user_id bigint(20) auto_increment not null primary key,
+--    user_username varchar(255) not null,
+--    user_name varchar(255) not null,
+--    user_lastname varchar(255) not null,
+--    user_password varchar(255) not null
+--);
 
 
 merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) values
@@ -51,3 +60,10 @@ merge into shop (shop_id, shop_name, shop_type, shop_location) key(shop_id) valu
 (38, 'Foodstuff and Nonsense', 'lebensmittel', 'hannover und essen'),
 (39, 'Eat Like a Horse', 'lebensmittel', 'dortmund, duesseldorf'),
 (40, 'Fair Play', 'spielwaren', 'dortmund, duesseldorf');
+
+-- merge into user(user_id, user_username, user_name, user_lastname, user_password) key(user_id) values
+-- (1, 'username1', 'name1', 'lastname1', 'password1'),
+-- (2, 'username2', 'name2', 'lastname2', 'password2'),
+-- (3, 'username3', 'name3', 'lastname3', 'password3'),
+-- (4, 'username4', 'name4', 'lastname4', 'password4'),
+-- (5, 'username5', 'name5', 'lastname5', 'password5');

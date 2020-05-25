@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output} from '@angular/core';
-import {NgModel} from '@angular/forms';
 import {Shop, ShopService} from '../_services/shop.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ShopDialogComponentData} from '../shop-dialog/shop-dialog.component';
+import {NgForm, NgModel} from '@angular/forms';
 
 
 export class ShopData implements Shop{
@@ -41,11 +41,11 @@ export class AddComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onSave(shopName: NgModel, shopType: NgModel, shopLocation: NgModel) {
-    this.shop.shopName = shopName.value;
-    this.shop.shopType = shopType.value;
-    this.shop.shopLocation = shopLocation.value;
-    this.shopService.addNewShop(shopName.value, shopType.value, shopLocation.value).subscribe(value => {});
+  onSave(addForm: NgForm) {
+    this.shop.shopName = addForm.value.shopName;
+    this.shop.shopType = addForm.value.shopType;
+    this.shop.shopLocation = addForm.value.shopLocation;
+    this.shopService.addNewShop(addForm.value.shopName, addForm.value.shopType, addForm.value.shopLocation).subscribe(value => {});
     this.dialogRef.close(this.shop);
   }
 
