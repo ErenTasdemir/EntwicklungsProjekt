@@ -1,8 +1,9 @@
 /*********************************
 ********* Shop_Location **********
 *********************************/
+drop table IF EXISTS shop_location;
 
-create table if not exists shop_location (
+create table  shop_location (
     location_id bigint(20) not null,
     shop_id bigint(20) not null,
     primary key ( location_id, shop_id),
