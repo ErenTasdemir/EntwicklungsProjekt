@@ -20,6 +20,7 @@ public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     Long shopId;
 
     @Column(name = "shop_name")

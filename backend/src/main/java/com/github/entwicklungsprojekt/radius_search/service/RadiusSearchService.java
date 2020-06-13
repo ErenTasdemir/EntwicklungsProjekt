@@ -35,14 +35,12 @@ public class RadiusSearchService {
             if (openstreetmaplocationservice.existsByName(location)) {
                 log.info("Retrieving Geodata for " + location + " from Database");
                 OpenstreetmapLocation openStreetMapLocation = openstreetmaplocationservice.getOneByLocationName(location);
-                geoData.setLatitude(openStreetMapLocation.getLatitude());
-                geoData.setLongitude(openStreetMapLocation.getLongitude());
+                geoData = openStreetMapLocation.getGeoData();
             }
             else {
                 geoData = openstreetmapConnectionService.getLatitudeAndLongitudeFromNominatim(location);
                 OpenstreetmapLocation openStreetMapLocation = new OpenstreetmapLocation();
-                openStreetMapLocation.setLatitude(geoData.getLatitude());
-                openStreetMapLocation.setLongitude(geoData.getLongitude());
+                openStreetMapLocation.setGeoData(geoData);
                 openStreetMapLocation.setName(location);
                 openstreetmaplocationservice.saveLocation(openStreetMapLocation);
             }

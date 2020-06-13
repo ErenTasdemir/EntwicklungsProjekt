@@ -1,5 +1,6 @@
 package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
+import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.openstreetmap_location.repository.OpenstreetmapLocationRepository;
 import org.junit.Before;
@@ -34,10 +35,9 @@ public class OpenstreetmapLocationServiceTest {
         //given
         String locationName = "location";
         OpenstreetmapLocation expectedOpenStreetMapLocation = new OpenstreetmapLocation();
-        expectedOpenStreetMapLocation.setId(1);
+        expectedOpenStreetMapLocation.setId(1L);
         expectedOpenStreetMapLocation.setName(locationName);
-        expectedOpenStreetMapLocation.setLatitude(0.0);
-        expectedOpenStreetMapLocation.setLongitude(0.0);
+        expectedOpenStreetMapLocation.setGeoData(new GeoData(0.0, 0.0));
 
         when(openstreetmapLocationRepositoryMock.findByName(locationName)).thenReturn(expectedOpenStreetMapLocation);
 
