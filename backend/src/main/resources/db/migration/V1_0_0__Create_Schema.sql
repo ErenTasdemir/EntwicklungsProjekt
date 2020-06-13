@@ -1,18 +1,6 @@
 SET MODE MYSQL;
 
 /*********************************
-************** Shop **************
-*********************************/
-
-create table if not exists shop (
-    id bigint(20) auto_increment not null primary key,
-    shop_name varchar(255) not null,
-    shop_type varchar(255) not null,
-    shop_location varchar(255) not null
-);
-
-
-/*********************************
 ************** User *************
 *********************************/
 
@@ -23,6 +11,21 @@ create table if not exists user (
     user_lastname varchar(255) not null,
     username varchar(255) not null
 );
+
+
+/*********************************
+************** Shop **************
+*********************************/
+
+create table if not exists shop (
+    id bigint(20) auto_increment not null primary key,
+    shop_name varchar(255) not null,
+    shop_type varchar(255) not null,
+    shop_location varchar(255) not null,
+    user_id bigint(20) not null,
+    constraint user_id foreign key (user_id) references user (id)
+);
+
 
 /*********************************
 ********** User_Roles ************

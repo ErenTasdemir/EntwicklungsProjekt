@@ -1,50 +1,4 @@
 /*********************************
-*********** Shop-Data ************
-*********************************/
-
-merge into shop (id, shop_name, shop_type, shop_location) key(id) values
-    (1, 'Bakery Crumble', 'baeckerei', 'bochum'),
-    (2, 'Bake Bake Bake', 'baeckerei', 'dortmund'),
-    (3, 'Fair and Wear', 'textilien', 'essen'),
-    (4, 'Food Schmood', 'lebensmittel', 'dortmund'),
-    (5, 'Toys Schmoys', 'spielwaren', 'koeln'),
-    (6, 'Couldn’t Wear Less', 'textilien', 'frankfurt am main'),
-    (7, 'Food of Sins', 'lebensmittel', 'essen und dortmund'),
-    (8, 'Cooking Schmooking', 'baeckerei', 'bochum harpen'),
-    (9, 'Eat Child O Mine', 'lebensmittel', 'norden'),
-    (10, 'Enjoy Enjoy Enjoy', 'spielwaren', 'hamburg'),
-    (11, 'In the Good Cooks', 'baeckerei', 'berlin, hamburg und essen'),
-    (12, 'Foodstuff Is Foodstuff', 'lebensmittel', 'karlsruhe'),
-    (13, 'Keep Your Wear on', 'textilien', 'hamm und dortmund'),
-    (14, 'Bad Wear Day', 'textilien', 'duesseldorf'),
-    (15, 'Sell Like Hot Bakes', 'baeckerei', 'gelsenkirchen'),
-    (16, 'Real Toy', 'spielwaren', 'dresden und leipzig'),
-    (17, 'In the Foodstuff', 'lebensmittel', 'stuttgart'),
-    (18, 'Make My Play', 'spielwaren', 'nuremberg'),
-    (19, 'Get the Snack', 'lebensmittel', 'hannover und essen'),
-    (20, 'Bake Back', 'baeckerei', 'dortmund, duesseldorf'),
-    (21, 'Come to Clothes', 'textilien', 'dortmund'),
-    (22, 'Off the Foodstuff', 'lebensmittel', 'essen'),
-    (23, 'Piece of Bake', 'baeckerei', 'dortmund'),
-    (24, 'Minced Clothes', 'textilien', 'koeln'),
-    (25, 'Set in Plays', 'spielwaren', 'frankfurt am main'),
-    (26, 'Toys Will Be Toys', 'spielwaren', 'essen und dortmund'),
-    (27, 'Snack Robinson', 'lebensmittel', 'bochum harpen'),
-    (28, 'Clothes Quarters', 'textilien', 'norden'),
-    (29, 'Icing on the Bake', 'baeckerei', 'hamburg'),
-    (30, 'Kick Your Meals', 'lebensmittel', 'berlin, hamburg und essen'),
-    (31, 'Blue Eyed Toy', 'spielwaren', 'karlsruhe'),
-    (32, 'Bake My Day', 'baeckerei', 'hamm und dortmund'),
-    (33, 'Snack the Ripper', 'lebensmittel', 'duesseldorf'),
-    (34, 'The Real Toy', 'spielwaren', 'gelsenkirchen'),
-    (35, 'Bake Breath Away', 'baeckerei', 'dresden und leipzig'),
-    (36, 'Textils Schmextils', 'textilien', 'stuttgart'),
-    (37, 'Bake Sense', 'baeckerei', 'nuremberg'),
-    (38, 'Foodstuff and Nonsense', 'lebensmittel', 'hannover und essen'),
-    (39, 'Eat Like a Horse', 'lebensmittel', 'dortmund, duesseldorf'),
-    (40, 'Fair Play', 'spielwaren', 'dortmund, duesseldorf');
-
-/*********************************
 *********** User_Data ************
 *********************************/
 
@@ -60,4 +14,49 @@ merge into user (id, user_password, user_firstname, user_lastname, username) key
     (9, '9k7t9swmfxHT', 'Matthew', 'Beekman', 'mbeekman8'),
     (10, 'AjOtcaK7N', 'Phyllis', 'Dengel', 'pdengel9');
 
+/*********************************
+*********** Shop-Data ************
+*********************************/
+
+merge into shop (id, shop_name, shop_type, shop_location, user_id) key(id) values
+   (1, 'Bakery Crumble', 'baeckerei', 'bochum', 1),
+   (2, 'Bake Bake Bake', 'baeckerei', 'dortmund', 2),
+   (3, 'Fair and Wear', 'textilien', 'essen', 3),
+   (4, 'Food Schmood', 'lebensmittel', 'dortmund', 4),
+   (5, 'Toys Schmoys', 'spielwaren', 'koeln', 5),
+   (6, 'Couldn’t Wear Less', 'textilien', 'frankfurt am main', 6),
+   (7, 'Food of Sins', 'lebensmittel', 'essen und dortmund', 7),
+   (8, 'Cooking Schmooking', 'baeckerei', 'bochum harpen', 8),
+   (9, 'Eat Child O Mine', 'lebensmittel', 'norden', 9),
+   (10, 'Enjoy Enjoy Enjoy', 'spielwaren', 'hamburg', 10),
+   (11, 'In the Good Cooks', 'baeckerei', 'berlin, hamburg und essen', 1),
+   (12, 'Foodstuff Is Foodstuff', 'lebensmittel', 'karlsruhe', 2),
+   (13, 'Keep Your Wear on', 'textilien', 'hamm und dortmund', 3),
+   (14, 'Bad Wear Day', 'textilien', 'duesseldorf', 4),
+   (15, 'Sell Like Hot Bakes', 'baeckerei', 'gelsenkirchen', 5),
+   (16, 'Real Toy', 'spielwaren', 'dresden und leipzig', 6),
+   (17, 'In the Foodstuff', 'lebensmittel', 'stuttgart', 7),
+   (18, 'Make My Play', 'spielwaren', 'nuremberg', 8),
+   (19, 'Get the Snack', 'lebensmittel', 'hannover und essen', 9),
+   (20, 'Bake Back', 'baeckerei', 'dortmund, duesseldorf', 10),
+   (21, 'Come to Clothes', 'textilien', 'dortmund', 1),
+   (22, 'Off the Foodstuff', 'lebensmittel', 'essen', 2),
+   (23, 'Piece of Bake', 'baeckerei', 'dortmund', 3),
+   (24, 'Minced Clothes', 'textilien', 'koeln', 4),
+   (25, 'Set in Plays', 'spielwaren', 'frankfurt am main', 5),
+   (26, 'Toys Will Be Toys', 'spielwaren', 'essen und dortmund', 6),
+   (27, 'Snack Robinson', 'lebensmittel', 'bochum harpen', 7),
+   (28, 'Clothes Quarters', 'textilien', 'norden', 8),
+   (29, 'Icing on the Bake', 'baeckerei', 'hamburg', 9),
+   (30, 'Kick Your Meals', 'lebensmittel', 'berlin, hamburg und essen', 10),
+   (31, 'Blue Eyed Toy', 'spielwaren', 'karlsruhe', 1),
+   (32, 'Bake My Day', 'baeckerei', 'hamm und dortmund', 2),
+   (33, 'Snack the Ripper', 'lebensmittel', 'duesseldorf', 3),
+   (34, 'The Real Toy', 'spielwaren', 'gelsenkirchen', 4),
+   (35, 'Bake Breath Away', 'baeckerei', 'dresden und leipzig', 5),
+   (36, 'Textils Schmextils', 'textilien', 'stuttgart', 6),
+   (37, 'Bake Sense', 'baeckerei', 'nuremberg', 7),
+   (38, 'Foodstuff and Nonsense', 'lebensmittel', 'hannover und essen', 8),
+   (39, 'Eat Like a Horse', 'lebensmittel', 'dortmund, duesseldorf', 9),
+   (40, 'Fair Play', 'spielwaren', 'dortmund, duesseldorf', 10);
 

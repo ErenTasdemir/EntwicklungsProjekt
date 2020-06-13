@@ -1,5 +1,6 @@
 package com.github.entwicklungsprojekt.user.persistence;
 
+import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -52,6 +54,9 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Shop> shops;
 
     public User(@NotNull @NotEmpty String username, @NotNull @NotEmpty String userFirstname, @NotNull @NotEmpty String userLastname, @NotNull @NotEmpty String userPassword, List<String> roles) {
         this.username = username;

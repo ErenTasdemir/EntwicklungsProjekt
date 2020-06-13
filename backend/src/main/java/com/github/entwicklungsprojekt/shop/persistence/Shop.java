@@ -1,6 +1,7 @@
 package com.github.entwicklungsprojekt.shop.persistence;
 
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
+import com.github.entwicklungsprojekt.user.persistence.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.search.annotations.Field;
@@ -40,6 +41,10 @@ public class Shop {
 
     @ManyToMany(mappedBy = "shops", fetch = FetchType.EAGER)
     Set<OpenstreetmapLocation> locations;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn( name = "user_id", nullable = false)
+    User user;
 
     public Shop(String shopName, String shopLocation, String shopType) {
         this.shopName = shopName;
