@@ -5,3 +5,76 @@
 .right-side {
   alignment: right;
 }
+
+
+.show-table:hover {
+  background-color: rgba(255, 255, 255, 0.27);;
+  cursor: pointer;
+}
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.btn-primary{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.btn-primary:hover{
+  background-color: gray;
+}
+
+h3 {
+  margin: 1.5em;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-bottom: 2em;
+  background-color: rgba(112, 128, 144, 0.93);
+}
+.search-box-content {
+  margin: 2em;
+}
+.btn-success {
+  min-width: 10%;
+  float: right;
+}
+.form-control {
+  margin-bottom: 1em;
+}
+
+.sticky-top {
+  background-color: lightgray;
+  box-shadow: 0 0 0 2px lightgray;
+}
+table thead th{
+  vertical-align: middle;
+  font-size: larger;
+  border-bottom: 0px;
+}
+th {
+  position: sticky !important;
+  top: 0 !important;
+  background: rgba(255, 255, 255, 0.42);
+}
+thead {
+  border: 2px solid slategray;
+  border-radius: 0.5em !important;
+}
+.section-content {
+  border-radius: 0.5em !important;
+  border: 2px solid slategray;
+  background-color: rgba(112, 128, 144, 0.93);
+}
+#add-button{
+  float: right;
+}
+#locate {
+  position: relative;
+}
+.table-text{
+  color: snow;
+}

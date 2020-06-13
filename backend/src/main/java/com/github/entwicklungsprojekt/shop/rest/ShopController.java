@@ -84,4 +84,15 @@ public class ShopController {
         return ResponseEntity.ok(projection);
     }
 
+    @GetMapping(path = "/my")
+    ResponseEntity<?> getShopsForUser(Principal principal) {
+        var user = userService.findByUsername(principal.getName());
+        var shops = shopService.getAllShopsOfUser(user);
+
+        List<ShopProjection> projections = new ArrayList<>();
+        shops.forEach(shop -> projections.add(projectionFactory.createProjection(ShopProjection.class, shop)));
+
+        return ResponseEntity.ok(projections);
+    }
+
 }

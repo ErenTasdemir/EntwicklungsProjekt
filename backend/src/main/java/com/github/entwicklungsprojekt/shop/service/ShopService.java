@@ -66,5 +66,9 @@ public class ShopService {
         return shop;
     }
 
+    public List<Shop> getAllShopsOfUser(User user) {
+        return shopRepository.findAllByUser(user);
+    }
+
 
 }
