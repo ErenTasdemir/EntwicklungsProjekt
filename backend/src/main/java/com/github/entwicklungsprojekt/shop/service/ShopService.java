@@ -5,13 +5,16 @@ import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
 import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
+import com.github.entwicklungsprojekt.user.persistence.User;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class ShopService {
 
     private final ShopRepository shopRepository;
@@ -36,10 +39,12 @@ public class ShopService {
         return shopRepository.getOne(id);
     }
 
-    public Shop addShop(String shopName, String shopLocation, String shopType) {
-        Shop shop = new Shop(shopName, shopLocation, shopType);
+    public Shop addShop(String shopName, String shopLocation, String shopType, User user) {
+        Shop shop = new Shop(shopName, shopLocation, shopType, user);
         shopRepository.save(shop);
         openstreetmapConnectionService.setLatitudeAndLongitudeForGivenShop(shop);
+
+        log.info("Shop with name {} has been added.", shop.getShopName());
 
         return shop;
     }

@@ -46,10 +46,11 @@ public class Shop {
     @JoinColumn( name = "user_id", nullable = false)
     User user;
 
-    public Shop(String shopName, String shopLocation, String shopType) {
+    public Shop(String shopName, String shopLocation, String shopType, User user) {
         this.shopName = shopName;
         this.shopLocation = shopLocation;
         this.shopType = shopType;
+        this.user = user;
     }
 
     public void setShopName(String shopName) {
