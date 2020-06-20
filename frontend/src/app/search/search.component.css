@@ -96,9 +96,9 @@ thead {
   border: 2px solid slategray;
   background-color: rgba(112, 128, 144, 0.93);
 }
-#add-button{
- float: right;
-}
+/*#add-button{*/
+/* float: right;*/
+/*}*/
 #locate {
   position: relative;
 }

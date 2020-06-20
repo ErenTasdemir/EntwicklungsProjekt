@@ -1,25 +1,41 @@
-<div style="margin-top: 5em" class="col-xs-12 col-md-6 offset-md-1">
-  <div class="row">
-    <p>Name:</p>
-    <p>{{user.lastname}}</p>
-  </div>
-  <div class="row">
-    <p>Vorname:</p>
-    <p>{{user.name}}</p>
-  </div>
-  <div class="row">
-    <p>Benutzername:</p>
-    <p>{{user.username}}</p>
-  </div>
+<div class="profile-content">
+  <div style="margin-top: 5em" class="profile-box offset-3 col-6">
+    <div class="row information-headline">
+      <h2>Benutzerdaten:</h2>
+    </div>
+    <div class="profile-box-content">
+      <div class="information">
+        <div class="row information-data">
+          <p>Benutzername:</p>
+        </div>
+        <div class="row information-data">
+          <p>Vorname:</p>
+        </div>
+        <div class="row information-data">
+          <p>Name:</p>
+        </div>
+      </div>
+      <div class= "information-content">
+        <div class="row information-content-data">
+          <p>{{user.username}}</p>
+        </div>
 
+        <div class="row information-content-data">
+          <p>{{user.name}}</p>
+        </div>
+        <div class="row information-content-data">
+          <p>{{user.lastname}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="table">
-    <table class="offset-2 col-8">
+    <table class="offset-3 col-6">
       <thead class="sticky-top">
       <th  id="name">Name</th>
       <th  id="type" >Branche</th>
+<!--      <th id="locate">Ort</th>-->
       <th  id="locate">Ort<button id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
-
-      <!--        <th  id="add"><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>-->
       </thead>
       <tbody class="section-content">
       <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
@@ -30,5 +46,7 @@
       </tr>
       </tbody>
     </table>
+<!--    <button id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button>-->
   </div>
 </div>
+

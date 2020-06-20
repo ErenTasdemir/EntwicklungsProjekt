@@ -29,8 +29,9 @@
       <thead class="sticky-top">
       <th  id="name">Name</th>
       <th  id="type" >Branche</th>
+<!--      <th  id="locate">Ort</th>-->
+<!--      <th  id="add"><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>-->
       <th  id="locate">Ort<button id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
-
       <!--        <th  id="add"><button class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>-->
       </thead>
       <tbody class="section-content">
@@ -39,6 +40,7 @@
           {{shopService.replaceInUmlaute(shop.shopName)}}</td>
         <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
         <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
+<!--        <td></td>-->
       </tr>
       </tbody>
     </table>

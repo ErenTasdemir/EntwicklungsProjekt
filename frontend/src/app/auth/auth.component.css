@@ -1,0 +1,15 @@
+.auth-container{
+  background-color: rgba(112, 128, 144, 0.93);
+  margin-top: 10em;
+  padding: 2em;
+  border-radius: 8px;
+}
+.auth-button{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.auth-header{
+  font-size: larger;
+  color: black;
+}
