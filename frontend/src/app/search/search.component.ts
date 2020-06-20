@@ -17,17 +17,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   shops: Shop[] = [];
 
   sendSearch = new EventEmitter<string>();
-
-  searchedShops: Shop[] = [];
-
   query = '';
 
   destroy$ = new Subject<void>();
   radiusInput: number;
 
   message: string;
-  imageName: string;
-  retrievedImage: any;
 
   formatLabel(value) {
     return value + 'km';
@@ -71,13 +66,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
   }
 
-  onShopAdded(shop: ShopData) {
-    this.shopService.addNewShop(shop.shopName, shop.shopType, shop.shopLocation)
-      .subscribe(data => {
-        this.shops.push(data);
-      });
-  }
-
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(value => {
@@ -96,11 +84,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(value => {
       if (value) {
         const i = this.shops.indexOf(value[0]);
-        console.log(i);
         if (value[1] === 'delete') {
           this.shops.splice(i, 1);
         }
-        console.log(value);
         if (value[1] === 'edit') {
           this.shops.splice(i, 1, value[0]);
         }

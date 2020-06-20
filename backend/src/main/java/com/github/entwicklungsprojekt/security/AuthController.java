@@ -42,6 +42,7 @@ public class AuthController {
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("token", token);
+            model.put("token_expiration_date", token.)
             model.put("name", user.getUserFirstname());
             model.put("lastname", user.getUserLastname());
             model.put("id", user.getId());

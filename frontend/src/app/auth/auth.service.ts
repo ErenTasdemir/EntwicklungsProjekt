@@ -30,10 +30,6 @@ export class AuthService {
   }
 
   register(username: string, password: string, name: string, lastname: string): Observable<AuthResponseData> {
-    console.log(username);
-    console.log(password);
-    console.log(name);
-    console.log(lastname);
     const body = {
       'username': username,
       'password': password,
@@ -45,19 +41,29 @@ export class AuthService {
     }));
   }
 
-  autoLogin() {
+  autoLoginOrLogout() {
     const userData: {
       id: string,
       username: string,
       name: string,
       lastname: string,
-      token: string
+      token: string,
+      tokenExpirationDate: string
     } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;
     }
 
-    const loadedUser = new User(userData.id, userData.username, userData.name, userData.lastname, userData.token);
+    if (new Date(userData.tokenExpirationDate) < new Date(Date.now())) {
+      this.logout();
+      return;
+    }
+    const newExpirationDate: Date = new Date(Date.now());
+    newExpirationDate.setHours(newExpirationDate.getHours() + 1);
+
+
+    const loadedUser = new User(userData.id, userData.username, userData.name, userData.lastname, userData.token, newExpirationDate);
+    localStorage.setItem('userData', JSON.stringify(loadedUser));
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
@@ -71,7 +77,9 @@ export class AuthService {
   }
 
   private handleAuthenticatioin(id: string, username: string, name: string, lastname: string, token: string) {
-    const user = new User(id, username, name, lastname, token);
+    const expirationDate: Date = new Date(Date.now());
+    expirationDate.setHours(expirationDate.getHours() + 1);
+    const user = new User(id, username, name, lastname, token, expirationDate);
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
   }

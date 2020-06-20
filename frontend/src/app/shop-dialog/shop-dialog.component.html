@@ -1,7 +1,7 @@
 <h1>Shop-Details</h1>
 <mat-dialog-content>
   <div *ngIf="data.shop">
-<!--    If not editing mode-->
+    <!--    If not editing mode-->
     <div *ngIf="!isEditing">
       <div class="row">
         <div class="col-7 details-container">
@@ -29,32 +29,36 @@
 
     <!--    If editing mode-->
     <div *ngIf="isEditing">
-      <div class="row">
-        <div class="col-7 details-container">
-          <div class="row">
-            <h4 class="col-4">Name:</h4>
-            <input class="text-capitalize" type="text" name="{{shop.shopName}}" ngModel="{{shop.shopName}}" #shopName="ngModel">
-          </div>
-          <div class="row">
-            <h4 class="col-4">Branche:</h4>
-            <select class="text-capitalize" ngModel #shopType="ngModel">
-              <option value="" selected disabled hidden>{{shopService.replaceInUmlaute(shop.shopType)}}</option>
-              <option *ngFor="let option of options" value="{{option}}" >{{shopService.replaceInUmlaute(option)}}</option>
-            </select>
-          </div>
-          <div class="row">
-            <h4 class="col-4">Ort:</h4>
-            <input class="text-capitalize" type="text" name="{{shop.shopLocation}}" ngModel="{{shop.shopLocation}}" #shopLocation="ngModel">
+      <form #editForm="ngForm" (ngSubmit)="onSubmitEdit(editForm)">
+        <div class="row">
+          <div class="col-7 details-container">
+            <div class="row">
+              <h4 class="col-4">Name:</h4>
+              <input class="text-capitalize" [placeholder]="shop.shopName" type="text" id="shopName" name="shopName" ngModel="{{shop.shopName}}">
+            </div>
+            <div class="row">
+              <h4 class="col-4">Branche:</h4>
+              <select class="text-capitalize" ngModel="{{shop.shopType}}" id="shopType" name="shopType">
+                <option value="{{shop.shopType}}" selected disabled >{{shopService.replaceInUmlaute(shop.shopType)}}</option>
+                <option *ngFor="let option of options"
+                        value="{{option}}">{{shopService.replaceInUmlaute(option)}}</option>
+              </select>
+            </div>
+            <div class="row">
+              <h4 class="col-4">Ort:</h4>
+              <input class="text-capitalize" type="text" id="shopLocation" name="shopLocation" [placeholder]="shop.shopLocation" ngModel="{{shop.shopLocation}}">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row buttons-container">
-        <div>
-          <button *ngIf="isEditing" class="btn btn-info dialog-button" (click)="onAccept(shopName, shopType, shopLocation )">Anwenden</button>
-          <button class="btn btn-danger dialog-button " (click)="onDelete(shop.shopId)">Löschen</button>
-          <button class="btn btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+        <div class="row buttons-container">
+          <div>
+            <button type="submit" *ngIf="isEditing" class="btn btn-info dialog-button">Anwenden</button>
+            <button type="button" class="btn btn-danger dialog-button " (click)="onDelete(shop.shopId)">Löschen</button>
+            <button type="button" class="btn btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
+
   </div>
 </mat-dialog-content>
