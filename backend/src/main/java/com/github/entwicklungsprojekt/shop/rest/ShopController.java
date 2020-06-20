@@ -64,7 +64,7 @@ public class ShopController {
 
     @PostMapping(path = "/{id}/edit")
     ResponseEntity<?> editShop(@PathVariable(name = "id")String id, @RequestBody ShopPayload shopPayload) {
-        var shop = shopService.editShop(Long.parseLong(id), shopPayload.getShopName(), shopPayload.getShopType(), shopPayload.getShopLocation());
+        var shop = shopService.editShop(Long.parseLong(id), shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType());
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);

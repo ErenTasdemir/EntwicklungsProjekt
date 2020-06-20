@@ -30,10 +30,6 @@ export class AuthService {
   }
 
   register(username: string, password: string, name: string, lastname: string): Observable<AuthResponseData> {
-    console.log(username);
-    console.log(password);
-    console.log(name);
-    console.log(lastname);
     const body = {
       'username': username,
       'password': password,
