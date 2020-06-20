@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Shop, ShopService} from '../_services/shop.service';
-import {NgModel} from '@angular/forms';
+import {NgForm, NgModel} from '@angular/forms';
 
 export interface ShopDialogComponentData {
   shop: Shop;
@@ -37,13 +37,11 @@ export class ShopDialogComponent implements OnInit {
     this.isEditing = true;
   }
 
-  onAccept(shopName: NgModel, shopType: NgModel, shopLocation: NgModel) {
-    this.shop.shopName = shopName.value;
-    this.shop.shopType = shopType.value;
-    this.shop.shopLocation = shopLocation.value;
-    console.log(this.shop.shopName, this.shop.shopType, this.shop.shopLocation);
-    this.shopService.editShop(shopName.value, shopType.value, shopLocation.value, this.shop.shopId).subscribe(value => {
-      console.log(value);
+  onSubmitEdit(editForm: NgForm) {
+    this.shop.shopName = editForm.value.shopName;
+    this.shop.shopType = editForm.value.shopType;
+    this.shop.shopLocation = editForm.value.shopLocation;
+    this.shopService.editShop(this.shop.shopName, this.shop.shopType, this.shop.shopLocation, this.shop.shopId).subscribe(value => {
       this.dialogRef.close([this.shop, 'edit']);
     });
     }
@@ -54,7 +52,6 @@ export class ShopDialogComponent implements OnInit {
     this.shopService.deleteShop(shopId).subscribe(value => {}
     );
     this.dialogRef.close([this.shop, 'delete'] );
-    console.log(shopId + ' is deleted');
   }
 
 }

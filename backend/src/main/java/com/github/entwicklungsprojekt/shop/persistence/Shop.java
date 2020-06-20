@@ -39,8 +39,12 @@ public class Shop {
     @Field
     String shopLocation;
 
-    @ManyToMany(mappedBy = "shops", fetch = FetchType.EAGER)
-    Set<OpenstreetmapLocation> locations;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "shop_location",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "shop_id")
+    )    Set<OpenstreetmapLocation> locations;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn( name = "user_id", nullable = false)
