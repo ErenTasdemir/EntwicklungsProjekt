@@ -21,14 +21,14 @@
       </div>
       <div class="row buttons-container">
         <div>
-          <button class="btn btn-group btn-info dialog-button" (click)="onEdit()">Bearbeiten</button>
-          <button class="btn btn-group btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+          <button *ngIf="isAuthenticated && ownedByUser" class="btn btn-group btn-info dialog-button" (click)="onEdit()">Bearbeiten</button>
+          <button class="btn btn-group btn-info dialog-button" (click)="this.dialogRef.close()">Schließen</button>
         </div>
       </div>
     </div>
 
     <!--    If editing mode-->
-    <div *ngIf="isEditing">
+    <div *ngIf="isEditing && isAuthenticated && ownedByUser">
       <form #editForm="ngForm" (ngSubmit)="onSubmitEdit(editForm)">
         <div class="row">
           <div class="col-7 details-container">
@@ -53,7 +53,7 @@
         <div class="row buttons-container">
           <div>
             <button type="submit" *ngIf="isEditing" class="btn btn-info dialog-button">Anwenden</button>
-            <button type="button" class="btn btn-danger dialog-button " (click)="onDelete(shop.shopId)">Löschen</button>
+            <button type="button" class="btn btn-danger dialog-button " (click)="onDelete()">Löschen</button>
             <button type="button" class="btn btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
           </div>
         </div>

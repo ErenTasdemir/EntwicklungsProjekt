@@ -43,17 +43,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   openShopDialog(shop: Shop) {
     const dialogRef = this.dialog.open(ShopDialogComponent, {
       data: {
-        shop
+        shop,
+        ownedByUser: true
       }
     });
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(value => {
       if (value) {
         const i = this.shops.indexOf(value[0]);
-        console.log(i);
         if (value[1] === 'delete') {
           this.shops.splice(i, 1);
         }
-        console.log(value);
         if (value[1] === 'edit') {
           this.shops.splice(i, 1, value[0]);
         }

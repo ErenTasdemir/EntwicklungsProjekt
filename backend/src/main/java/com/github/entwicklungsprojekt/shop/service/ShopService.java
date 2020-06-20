@@ -1,5 +1,6 @@
 package com.github.entwicklungsprojekt.shop.service;
 
+import com.github.entwicklungsprojekt.exceptions.ShopNotFoundException;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
@@ -9,6 +10,7 @@ import com.github.entwicklungsprojekt.user.persistence.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class ShopService {
     }
 
     public Shop editShop(Long shopId, String newName, String newLocation, String newType) {
-        Shop shopToEdit = shopRepository.getOne(shopId);
+        Shop shopToEdit = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
         shopToEdit.setShopName(newName);
         shopToEdit.setShopType(newType);
         shopToEdit.setShopLocation(newLocation);
@@ -61,7 +63,8 @@ public class ShopService {
     }
 
     public Shop deleteShop(Long shopId) {
-        Shop shop = shopRepository.getOne(shopId);
+        Shop shop = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
+        System.out.println(shop.getShopId());
         shopRepository.delete(shop);
         return shop;
     }

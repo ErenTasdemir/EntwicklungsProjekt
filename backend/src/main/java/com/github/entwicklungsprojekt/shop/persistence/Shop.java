@@ -50,6 +50,11 @@ public class Shop {
     @JoinColumn( name = "user_id", nullable = false)
     User user;
 
+    @PreRemove
+    private void removeShopFromUser() {
+        user.getShops().remove(this);
+    }
+
     public Shop(String shopName, String shopLocation, String shopType, User user) {
         this.shopName = shopName;
         this.shopLocation = shopLocation;

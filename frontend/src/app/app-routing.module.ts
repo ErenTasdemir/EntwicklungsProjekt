@@ -7,6 +7,7 @@ import {AuthComponent} from './auth/auth.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AuthGuard} from './auth/auth.guard';
 import {ProfileResolverService} from './_resolver/profile-resolver.service';
+import {UserShopsResolverService} from './_resolver/user-shops-resolver.service';
 
 const appRoutingModule: Routes = [
   { path: '',
@@ -16,7 +17,8 @@ const appRoutingModule: Routes = [
     path: 'search-shop',
     component: SearchComponent,
     resolve: {
-      shops: ShopResolverService
+      shops: ShopResolverService,
+      userShops: UserShopsResolverService
     }
   },
   { path: 'add-shop',

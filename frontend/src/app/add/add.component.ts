@@ -45,8 +45,10 @@ export class AddComponent implements OnInit, OnDestroy {
     this.shop.shopName = addForm.value.shopName;
     this.shop.shopType = addForm.value.shopType;
     this.shop.shopLocation = addForm.value.shopLocation;
-    this.shopService.addNewShop(addForm.value.shopName, addForm.value.shopType, addForm.value.shopLocation).subscribe(value => {});
-    this.dialogRef.close(this.shop);
+    this.shopService.addNewShop(addForm.value.shopName, addForm.value.shopType, addForm.value.shopLocation)
+      .subscribe(value => {this.shop = value;
+                           this.dialogRef.close(this.shop);
+      });
   }
 
 }
