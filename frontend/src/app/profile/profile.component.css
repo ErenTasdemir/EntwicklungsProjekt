@@ -85,3 +85,7 @@ h2{
 .profile-content {
   width: 100%;
 }
+
+#add-button{
+  float: right;
+}
