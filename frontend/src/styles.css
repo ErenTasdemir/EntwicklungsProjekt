@@ -15,3 +15,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   overflow: auto;
   height: 100%;
 }
+.general-buttons{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+

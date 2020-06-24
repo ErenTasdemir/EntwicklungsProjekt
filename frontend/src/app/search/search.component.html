@@ -1,5 +1,3 @@
-<h3>Hier können Sie nach Shops suchen!</h3>
-<hr>
 <div class="site-content">
   <div class="search-box offset-3 col-6">
     <div class="search-box-content">
@@ -19,7 +17,7 @@
           </mat-slider>
         </div>
         <div class="col-sm-3">
-          <button class="btn-success btn " type=submit (click)="sendSearchRequest(query, location, radiusInput)"><em class="material-icons">search</em>Suchen</button>
+          <button class="btn-success btn general-buttons" type=submit (click)="sendSearchRequest(query, location, radiusInput)"><em class="material-icons">search</em>Suchen</button>
         </div>
       </div>
     </div>
@@ -29,7 +27,7 @@
       <thead class="sticky-top">
       <th  id="name">Name</th>
       <th  id="type" >Branche</th>
-      <th  id="locate"><label style="margin-top: 0.5em" for="add-button">Ort</label><button *ngIf="isAuthenticated" id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
+      <th  id="locate"><label style="margin-top: 0.5em" for="add-button">Ort</label><button *ngIf="isAuthenticated" id="add-button" class="btn btn-primary general-buttons" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>
       </thead>
       <tbody class="section-content">
       <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">

@@ -21,8 +21,8 @@
       </div>
       <div class="row buttons-container">
         <div>
-          <button *ngIf="isAuthenticated && ownedByUser" class="btn btn-group btn-info dialog-button" (click)="onEdit()">Bearbeiten</button>
-          <button class="btn btn-group btn-info dialog-button" (click)="this.dialogRef.close()">Schließen</button>
+          <button *ngIf="isAuthenticated && ownedByUser" class="btn btn-group btn-info dialog-button general-buttons" (click)="onEdit()">Bearbeiten</button>
+          <button class="btn btn-group btn-info dialog-button general-buttons" (click)="this.dialogRef.close()">Schließen</button>
         </div>
       </div>
     </div>
@@ -52,9 +52,9 @@
         </div>
         <div class="row buttons-container">
           <div>
-            <button type="submit" *ngIf="isEditing" class="btn btn-info dialog-button">Anwenden</button>
-            <button type="button" class="btn btn-danger dialog-button " (click)="onDelete()">Löschen</button>
-            <button type="button" class="btn btn-info dialog-button" (click)="this.dialogRef.close()">Abbrechen</button>
+            <button type="submit" *ngIf="isEditing" class="btn btn-info dialog-button general-buttons">Anwenden</button>
+            <button type="button" class="btn btn-danger dialog-button general-buttons" (click)="onDelete()">Löschen</button>
+            <button type="button" class="btn btn-info dialog-button general-buttons" (click)="this.dialogRef.close()">Abbrechen</button>
           </div>
         </div>
       </form>

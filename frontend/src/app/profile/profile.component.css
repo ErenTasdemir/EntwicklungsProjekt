@@ -7,11 +7,6 @@
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-primary{
-  color: black;
-  background-color: white;
-  border-color: white;
-}
 .btn-primary:hover{
   background-color: gray;
 }

@@ -34,7 +34,7 @@
       <thead class="sticky-top">
       <th  id="name">Name</th>
       <th  id="type" >Branche</th>
-      <th  id="locate"><label style="margin-top: 0.5em" for="add-button">Ort</label><button id="add-button" class="btn btn-primary" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>      </thead>
+      <th  id="locate"><label style="margin-top: 0.5em" for="add-button">Ort</label><button id="add-button" class="btn btn-primary general-buttons" (click)="openAddDialog()"><em class="material-icons">add</em>Hinzufügen</button></th>      </thead>
       <tbody class="section-content">
       <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
         <td class="text-capitalize table-text">

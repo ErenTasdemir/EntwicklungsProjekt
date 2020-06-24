@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" routerLink="" style="font-family:'Arial Black';font-size: xx-large">ShopBoss</a>
+  <a class="navbar-brand" routerLink="" style="font-family:'Arial Black';font-size: xx-large">Shop.de</a>
   <div class="button">
-    <a routerLink="search-shop">Search Shop</a>
+    <a routerLink="search-shop">Suche</a>
     <a routerLink="profile">Mein Profil</a>
     <a *ngIf="!isAuthenticated" routerLink="auth">Einloggen</a>
     <a *ngIf="isAuthenticated" (click)="onLogout()" routerLink="auth">Ausloggen</a>
