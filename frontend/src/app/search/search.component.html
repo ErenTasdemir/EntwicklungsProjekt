@@ -31,10 +31,11 @@
       </thead>
       <tbody class="section-content">
       <tr *ngFor="let shop of shops" class="show-table" (click)="openShopDialog(shop)">
-        <td class="text-capitalize table-text">
-          {{shopService.replaceInUmlaute(shop.shopName)}}</td>
+        <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopName)}}</td>
         <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopType)}}</td>
-        <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopLocation)}}</td>
+        <td class="text-capitalize table-text">{{shopService.replaceInUmlaute(shop.shopLocation)}}
+          <em style="float: right" *ngIf="ownedByUser(shop)" class="material-icons">person</em>
+        </td>
 <!--        <td></td>-->
       </tr>
       </tbody>

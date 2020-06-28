@@ -116,4 +116,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.userSub.unsubscribe();
   }
 
+    ownedByUser(shop: Shop): boolean {
+      return this.userShops ? this.userShops.some(s => s && s.shopId === shop.shopId) : false;
+    }
 }
