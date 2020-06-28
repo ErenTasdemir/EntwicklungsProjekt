@@ -1,5 +1,6 @@
 package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
+import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.openstreetmap_location.repository.OpenstreetmapLocationRepository;
@@ -70,6 +71,14 @@ public class OpenstreetmapLocationService {
         List<String> matchedCityNames = new ArrayList<>();
         this.loadedLocations.forEach(cityName -> updateProjectLocationsListIfMatches(shopLocation, matchedCityNames, cityName));
         return matchedCityNames;
+    }
+
+    public boolean isRealLocation(String location) {
+        List<String> extractedLocations = matchShopLocationWithOsmLocationCsv(location);
+        if (extractedLocations.isEmpty()){
+            return false;
+        }
+        return true;
     }
 
     private void updateProjectLocationsListIfMatches(String shopLocation, List<String> matchedCityNames, String cityName) {

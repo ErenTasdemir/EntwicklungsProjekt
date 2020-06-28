@@ -1,7 +1,9 @@
 package com.github.entwicklungsprojekt.shop.service;
 
+import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.exceptions.ShopNotFoundException;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
+import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapLocationService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
@@ -20,10 +22,9 @@ import java.util.List;
 public class ShopService {
 
     private final ShopRepository shopRepository;
-
     private final HibernateSearchService shopSearchService;
-
     private final OpenstreetmapConnectionService openstreetmapConnectionService;
+    private final OpenstreetmapLocationService openstreetmapLocationService;
 
 
     public List<ShopProjection> getAllAvailibleShops() {
@@ -42,6 +43,9 @@ public class ShopService {
     }
 
     public Shop addShop(String shopName, String shopLocation, String shopType, User user) {
+        if (!openstreetmapLocationService.isRealLocation(shopLocation)) {
+            throw new NotARealLocationException();
+        }
         Shop shop = new Shop(shopName, shopLocation, shopType, user);
         shopRepository.save(shop);
         openstreetmapConnectionService.setLatitudeAndLongitudeForGivenShop(shop);

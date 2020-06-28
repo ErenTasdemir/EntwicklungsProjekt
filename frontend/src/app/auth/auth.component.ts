@@ -44,13 +44,10 @@ export class AuthComponent implements OnInit {
         this.isLoading = false;
         this.router.navigate(['./search-shop']);
       }, errorRes => {
-        if (errorRes.error.message === 'Access Denied') {
-          this.error = 'Benutzername/Passwort stimmen nicht überein!';
-        }
-        if (errorRes.error.message === 'Username already taken') {
-          this.error = 'Benutzername wird schon verwendet!';
-        } else {
+        if (errorRes.error.message === 'Es ist schon ein Nutzer unter diesem Benutzernamen registriert!') {
           this.error = errorRes.error.message;
+        } else {
+          this.error = 'Benutzername und Passwort stimmen nicht überein!';
         }
         this.isLoading = false;
       }
