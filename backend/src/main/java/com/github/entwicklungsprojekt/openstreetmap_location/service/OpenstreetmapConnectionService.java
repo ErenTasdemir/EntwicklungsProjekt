@@ -2,6 +2,7 @@ package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
@@ -116,11 +117,15 @@ public class OpenstreetmapConnectionService {
         } catch (IOException e) {
             throw new IllegalStateException();
         }
+
         GeoData geoData = new GeoData();
 
-        for (JsonNode root : rootArray){
-            geoData.setLatitude(root.path("lat").asDouble());
-            geoData.setLongitude(root.path("lon").asDouble());
+        if (!rootArray.has(0)) {
+            geoData.setLatitude(0.0);
+            geoData.setLongitude(0.0);
+        } else {
+            geoData.setLatitude(rootArray.get(0).path("lat").asDouble());
+            geoData.setLongitude(rootArray.get(0).path("lon").asDouble());
         }
 
         return geoData;

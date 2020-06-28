@@ -40,11 +40,6 @@
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-primary{
-  color: black;
-  background-color: white;
-  border-color: white;
-}
 .btn-primary:hover{
   background-color: gray;
 }
@@ -58,6 +53,7 @@ h3 {
   flex-direction: column;
   border-radius: 8px;
   margin-bottom: 2em;
+  margin-top: 2em;
   background-color: rgba(112, 128, 144, 0.93);
 }
 .search-box-content {
@@ -96,9 +92,11 @@ thead {
   border: 2px solid slategray;
   background-color: rgba(112, 128, 144, 0.93);
 }
+
 #add-button{
  float: right;
 }
+
 #locate {
   position: relative;
 }

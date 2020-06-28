@@ -18,13 +18,11 @@ public class OpenstreetmapLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String name;
 
-    private Double latitude;
-
-    private Double longitude;
+    private GeoData geoData;
 
 
     @ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER)
@@ -37,9 +35,5 @@ public class OpenstreetmapLocation {
         this.shops.add(shop);
     }
 
-    public void setGeoData(GeoData geodata) {
-        this.latitude = geodata.getLatitude();
-        this.longitude = geodata.getLongitude();
-    }
 
 }

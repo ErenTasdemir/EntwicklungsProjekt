@@ -3,6 +3,9 @@ mat-dialog-content {
   min-width: 75vh;
 
 }
+::ng-deep mat-dialog-container {
+  background-color: rgb(112, 128, 144) !important;
+}
 .details-container {
   float: right;
 }
@@ -28,6 +31,4 @@ p {
   border-radius: 5px;
   font-size: 17px;
 }
-::ng-deep mat-dialog-container {
-  background-color: pink !important;
-}
+

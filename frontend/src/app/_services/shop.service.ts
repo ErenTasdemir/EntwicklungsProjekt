@@ -11,6 +11,10 @@ export class ShopService {
     return this.http.get<Shop[]>('http://localhost:8081/shops');
   }
 
+  getShopsForUser(): Observable<Shop[]> {
+    return this.http.get<Shop[]>('http://localhost:8081/shops/my');
+  }
+
   searchShops(query: string): Observable<Shop[]> {
     query = encodeURI(query.replace('&', ' '));
     return this.http.get<Shop[]>(`http://localhost:8081/shops/search?query=${query}`);
@@ -46,8 +50,8 @@ export class ShopService {
   editShop(shopName: string, shopType: string, shopLocation: string, shopId: string): Observable<Shop> {
     const body = {
       shopName,
-      shopType,
-      shopLocation
+      shopLocation,
+      shopType
     };
     return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/edit`, body);
   }

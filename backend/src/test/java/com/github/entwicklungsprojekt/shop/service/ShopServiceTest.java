@@ -5,6 +5,7 @@ import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
 import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
+import com.github.entwicklungsprojekt.user.persistence.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,9 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShopServiceTest {
@@ -26,6 +26,8 @@ public class ShopServiceTest {
     private final ShopProjection shopProjectionMock = Mockito.mock(ShopProjection.class);
 
     private final Shop shopMock = Mockito.mock(Shop.class);
+
+    private final User userMock = Mockito.mock(User.class);
 
     @Mock
     private ShopRepository shopRepositoryMock;
@@ -104,7 +106,7 @@ public class ShopServiceTest {
         String expectedShopLocation = "location";
 
         //when
-        Shop actualShop = shopService.addShop(expectedShopName, expectedShopLocation, expectedShopType);
+        Shop actualShop = shopService.addShop(expectedShopName, expectedShopLocation, expectedShopType, userMock);
 
         //then
         verify(shopRepositoryMock).save(Mockito.any(Shop.class));

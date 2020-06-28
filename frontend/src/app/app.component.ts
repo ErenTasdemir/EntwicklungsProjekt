@@ -9,7 +9,7 @@ import {AuthService} from './auth/auth.service';
 })
 export class AppComponent implements OnInit{
   constructor(private titleService: Title, private authService: AuthService) {
-    this.titleService.setTitle('ShopBoss');
+    this.titleService.setTitle('Shop.de');
   }
 
   ngOnInit(): void {

@@ -2,6 +2,9 @@ mat-dialog-content {
   max-width: 100%;
   min-width: 75vh;
 }
+::ng-deep mat-dialog-container {
+  background-color: rgb(112, 128, 144) !important;
+}
 .details-container {
   float: right;
   font-size: 17px;
@@ -34,3 +37,5 @@ input {
 select {
   margin: 0.1em;
 }
+
+

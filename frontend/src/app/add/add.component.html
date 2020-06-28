@@ -2,6 +2,11 @@
   <h1>Shop-Details</h1>
   <mat-dialog-content>
     <form #addForm="ngForm" (ngSubmit)="onSave(addForm)">
+      <div *ngIf="error">
+        <p>{{error}}</p>
+        <hr>
+      </div>
+
       <div class="row">
         <div class="col-7 details-container">
           <div class="row text-capitalize">
@@ -17,7 +22,7 @@
           </div>
           <div class="row">
             <h4 class="col-4">Ort:</h4>
-            <input class="text-capitalize" type="text" name="shopLocation" ngModel required>
+            <input id="location-input" class="text-capitalize" type="text" name="shopLocation" ngModel required>
           </div>
         </div>
       </div>
@@ -25,8 +30,8 @@
         <div>
           <!--        <div class="input-group mb-3">-->
 <!--          <button class="btn btn-group btn-info"  type="submit" (click)="onSave(shopName, shopType, shopLocation)">Speichern</button>-->
-          <button class="btn btn-group btn-info"  type="submit">Speichern</button>
-          <button  class="btn btn-group btn-info" type="button" (click)="this.dialogRef.close()">Abbrechen</button>
+          <button [disabled]="addForm.invalid" class="btn btn-group btn-info general-buttons"  type="submit">Speichern</button>
+          <button  class="btn btn-group btn-info general-buttons" type="button" (click)="this.dialogRef.close()">Abbrechen</button>
         </div>
       </div>
     </form>

@@ -1,6 +1,7 @@
 package com.github.entwicklungsprojekt.shop.persistence;
 
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
+import com.github.entwicklungsprojekt.user.persistence.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.search.annotations.Field;
@@ -20,6 +21,7 @@ public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     Long shopId;
 
     @Column(name = "shop_name")
@@ -44,10 +46,20 @@ public class Shop {
             inverseJoinColumns = @JoinColumn(name = "shop_id")
     )    Set<OpenstreetmapLocation> locations;
 
-    public Shop(String shopName, String shopLocation, String shopType) {
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn( name = "user_id", nullable = false)
+    User user;
+
+    @PreRemove
+    private void removeShopFromUser() {
+        user.getShops().remove(this);
+    }
+
+    public Shop(String shopName, String shopLocation, String shopType, User user) {
         this.shopName = shopName;
         this.shopLocation = shopLocation;
         this.shopType = shopType;
+        this.user = user;
     }
 
     public void setShopName(String shopName) {

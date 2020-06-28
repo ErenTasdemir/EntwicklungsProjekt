@@ -4,6 +4,7 @@ import com.github.entwicklungsprojekt.shop.payload.ShopPayload;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
 import com.github.entwicklungsprojekt.shop.search.HibernateSearchService;
 import com.github.entwicklungsprojekt.shop.service.ShopService;
+import com.github.entwicklungsprojekt.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.projection.ProjectionFactory;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class ShopController {
     private final ShopService shopService;
     private final ProjectionFactory projectionFactory;
     private final HibernateSearchService shopSearchService;
+    private final UserService userService;
 
     @Autowired
-    public ShopController(ShopService shopService, @Qualifier("shopSearchService") HibernateSearchService shopSearchService, ProjectionFactory projectionFactory) {
+    public ShopController(ShopService shopService, @Qualifier("shopSearchService") HibernateSearchService shopSearchService, ProjectionFactory projectionFactory, UserService userService) {
         this.shopService = shopService;
         this.projectionFactory = projectionFactory;
         this.shopSearchService = shopSearchService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -55,8 +59,9 @@ public class ShopController {
     }
 
     @PostMapping(path = "/add")
-    ResponseEntity<?> addShop(@RequestBody ShopPayload shopPayload) {
-        var shop = shopService.addShop(shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType());
+    ResponseEntity<?> addShop(@RequestBody ShopPayload shopPayload, Principal principal) {
+        var user = userService.findByUsername(principal.getName());
+        var shop = shopService.addShop(shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType(), user);
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);
@@ -77,6 +82,17 @@ public class ShopController {
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);
+    }
+
+    @GetMapping(path = "/my")
+    ResponseEntity<?> getShopsForUser(Principal principal) {
+        var user = userService.findByUsername(principal.getName());
+        var shops = shopService.getAllShopsOfUser(user);
+
+        List<ShopProjection> projections = new ArrayList<>();
+        shops.forEach(shop -> projections.add(projectionFactory.createProjection(ShopProjection.class, shop)));
+
+        return ResponseEntity.ok(projections);
     }
 
 }

@@ -1,7 +1,86 @@
-.left-side {
-  alignment: left;
+
+.show-table:hover {
+  background-color: rgba(255, 255, 255, 0.27);;
+  cursor: pointer;
+}
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.btn-primary:hover{
+  background-color: gray;
 }
 
-.right-side {
-  alignment: right;
+.profile-box {
+  flex-direction: column;
+  margin-bottom: 2em;
+  background-color: rgba(112, 128, 144, 0.93);
+  border: 2px solid slategray;
+}
+.profile-box-content {
+  margin: 2em;
+  display: flex;
+  padding-bottom: 1em;
+}
+
+.form-control {
+  margin-bottom: 1em;
+}
+
+.sticky-top {
+  background-color: lightgray;
+  box-shadow: 0 0 0 2px lightgray;
+}
+table thead th{
+  vertical-align: middle;
+  font-size: larger;
+  border-bottom: 0px;
+}
+th {
+  position: sticky !important;
+  top: 0 !important;
+  background: rgba(255, 255, 255, 0.42);
+}
+thead {
+  border: 2px solid slategray;
+  border-radius: 0.5em !important;
+}
+.section-content {
+  border-radius: 0.5em !important;
+  border: 2px solid slategray;
+  background-color: rgba(112, 128, 144, 0.93);
+  width: inherit;
+}
+#add-button {
+}
+.table-text{
+  color: snow;
+}
+.information-content{
+  /*flex: 1;*/
+  margin-left: 8em;
+  margin-top: 0.2em;
+}
+.information-data{
+  font-size: larger;
+  color: black;
+}
+.information-content-data{
+  color: white;
+}
+.information-headline {
+  background: #dedede;
+  border-bottom: 2px solid slategray;
+}
+h2{
+  margin-left: 1.3em;
+  margin-top: 1em;
+}
+
+.profile-content {
+  width: 100%;
+}
+
+#add-button{
+  float: right;
 }
