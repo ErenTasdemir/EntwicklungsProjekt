@@ -78,5 +78,7 @@ public class Shop {
         this.locations = locations;
     }
 
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
