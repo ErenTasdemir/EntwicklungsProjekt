@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
+/**
+ * Holds {@code latitude} and {@code longitude} information
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

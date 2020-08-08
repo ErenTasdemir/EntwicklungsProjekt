@@ -19,6 +19,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
+/**
+ * Entity to persist {@link User} data.
+ */
 @NoArgsConstructor
 @Getter
 @Entity
@@ -27,25 +30,40 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class User implements UserDetails {
 
+    /**
+     * The Id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    /**
+     * The Username.
+     */
     @NotNull
     @NotEmpty
     @Column(name = "username")
     String username;
 
+    /**
+     * The User firstname.
+     */
     @NotNull
     @NotEmpty
     @Column(name = "user_firstname")
     String userFirstname;
 
+    /**
+     * The User lastname.
+     */
     @NotNull
     @NotEmpty
     @Column(name = "user_lastname")
     String userLastname;
 
+    /**
+     * The Password.
+     */
     @NotNull
     @NotEmpty
     @Column(name = "user_password")
@@ -58,6 +76,15 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Shop> shops;
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param username      the username
+     * @param userFirstname the user firstname
+     * @param userLastname  the user lastname
+     * @param userPassword  the user password
+     * @param roles         the roles
+     */
     public User(@NotNull @NotEmpty String username, @NotNull @NotEmpty String userFirstname, @NotNull @NotEmpty String userLastname, @NotNull @NotEmpty String userPassword, List<String> roles) {
         this.username = username;
         this.userFirstname = userFirstname;
@@ -66,22 +93,47 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    /**
+     * Sets username.
+     *
+     * @param username the username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Sets user firstname.
+     *
+     * @param userFirstname the user firstname
+     */
     public void setUserFirstname(String userFirstname) {
         this.userFirstname = userFirstname;
     }
 
+    /**
+     * Sets user lastname.
+     *
+     * @param userLastname the user lastname
+     */
     public void setUserLastname(String userLastname) {
         this.userLastname = userLastname;
     }
 
+    /**
+     * Sets user password.
+     *
+     * @param userPassword the user password
+     */
     public void setUserPassword(String userPassword) {
         this.password = userPassword;
     }
 
+    /**
+     * Sets roles.
+     *
+     * @param roles the roles
+     */
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }

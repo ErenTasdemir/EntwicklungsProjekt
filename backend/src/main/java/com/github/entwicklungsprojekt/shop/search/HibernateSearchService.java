@@ -18,20 +18,35 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The type Hibernate search service.
+ */
 @Slf4j
 @Transactional
 @Service
 public class HibernateSearchService {
 
+    /**
+     * The Entity manager.
+     */
     @PersistenceContext
     EntityManager entityManager;
 
     private final Map<Class<?>, List<String>> classIndexedFieldMap;
 
+    /**
+     * Instantiates a new Hibernate search service.
+     */
     public HibernateSearchService() {
         this.classIndexedFieldMap = new HashMap<>();
     }
 
+    /**
+     * Search shops list.
+     *
+     * @param simpleQueryString the simple query string
+     * @return the list
+     */
     @SuppressWarnings("unchecked")
     public List<Shop> searchShops(@NotNull String simpleQueryString) {
         var query = getShopBaseQuery(simpleQueryString);
@@ -108,6 +123,11 @@ public class HibernateSearchService {
         return Search.getFullTextEntityManager(entityManager);
     }
 
+    /**
+     * Index existing entities.
+     *
+     * @param initEntityManager the init entity manager
+     */
     void indexExistingEntities(EntityManager initEntityManager) {
         try {
             Search.getFullTextEntityManager(initEntityManager)

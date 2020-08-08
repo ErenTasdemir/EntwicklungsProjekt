@@ -2,7 +2,6 @@ package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
@@ -25,6 +24,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A Service Class containing methods concerning the connection to the Nominatim API
+ */
 @Slf4j
 @Transactional
 @Service
@@ -39,6 +41,9 @@ public class OpenstreetmapConnectionService {
         this.shopRepository = shopRepository;
     }
 
+    /**
+     * Sets Geodata for all loaded Shops
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void setLatitudeAndLongitueForLoadedShops() {
         log.info("Setting Geodata for loaded shops");
@@ -48,6 +53,11 @@ public class OpenstreetmapConnectionService {
         log.info("Succesfully saved Geodata for Locations!");
     }
 
+    /**
+     * Sets Geodata for Shop
+     * @param shop
+     *  The {@link Shop} for which the Location is to be set.
+     */
     public void setLatitudeAndLongitudeForGivenShop(Shop shop) {
         if (shop.getLocations() == null || shop.getLocations().isEmpty()){
             List<String> projectLocationNames = openstreetmapLocationService.matchShopLocationWithOsmLocationCsv(shop.getShopLocation());
@@ -72,9 +82,17 @@ public class OpenstreetmapConnectionService {
         }
     }
 
-    public GeoData getLatitudeAndLongitudeFromNominatim(String query) {
-        log.info("Retrieving Geodata for " + query + " from Nominatim");
-        ResponseEntity<String> response = makeGetLocationRequest(query);
+    /**
+     * Sends a GET-Request to the Nominatim API and retrieves {@link GeoData}.
+     * @param location
+     *  The location to get {@link GeoData} for.
+     *
+     * @return
+     * {@link GeoData} for location.
+     */
+    public GeoData getLatitudeAndLongitudeFromNominatim(String location) {
+        log.info("Retrieving Geodata for " + location + " from Nominatim");
+        ResponseEntity<String> response = makeGetLocationRequest(location);
         log.info("Nominatim server status : " + response.getStatusCode().toString());
         return getGeodataFromResponseJson(response);
     }

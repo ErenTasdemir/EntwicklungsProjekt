@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A service class containing methods for a radius search functionality.
+ */
 @Slf4j
 @Service
 public class RadiusSearchService {
@@ -18,12 +21,26 @@ public class RadiusSearchService {
     private final ShopRepository shopRepository;
     private final OpenstreetmapLocationService openstreetmaplocationservice;
 
+    /**
+     * Instantiates a new Radius search service.
+     *
+     * @param openstreetmapConnectionService the openstreetmap connection service
+     * @param shopRepository                 the shop repository
+     * @param openstreetmaplocationservice   the openstreetmaplocationservice
+     */
     public RadiusSearchService(OpenstreetmapConnectionService openstreetmapConnectionService, ShopRepository shopRepository, OpenstreetmapLocationService openstreetmaplocationservice) {
         this.openstreetmapConnectionService = openstreetmapConnectionService;
         this.shopRepository = shopRepository;
         this.openstreetmaplocationservice = openstreetmaplocationservice;
     }
 
+    /**
+     * Gets shop ids within radius.
+     *
+     * @param location the location
+     * @param radius   the radius
+     * @return the shop ids within radius
+     */
     public List<Long> getShopIdsWithinRadius(String location , int radius) {
         List<Long> allProjectIdsInRadius;
 

@@ -1,7 +1,10 @@
 package com.github.entwicklungsprojekt.shop.projection;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.github.entwicklungsprojekt.shop.persistence.Shop;
 
+/**
+ * Projection of {@link Shop}s only containing data that is relevant to the client.
+ */
 public interface ShopProjection {
 
     Long getShopId();
