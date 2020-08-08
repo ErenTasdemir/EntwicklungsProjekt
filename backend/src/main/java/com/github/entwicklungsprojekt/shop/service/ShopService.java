@@ -2,6 +2,7 @@ package com.github.entwicklungsprojekt.shop.service;
 
 import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.exceptions.ShopNotFoundException;
+import com.github.entwicklungsprojekt.exceptions.UserNotAuthorizedForActionException;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapLocationService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
@@ -55,8 +56,11 @@ public class ShopService {
         return shop;
     }
 
-    public Shop editShop(Long shopId, String newName, String newLocation, String newType) {
+    public Shop editShop(Long shopId, String newName, String newLocation, String newType, User user) {
         Shop shopToEdit = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
+        if (!shopToEdit.getUser().equals(user)){
+            throw new UserNotAuthorizedForActionException();
+        }
         shopToEdit.setShopName(newName);
         shopToEdit.setShopType(newType);
         shopToEdit.setShopLocation(newLocation);
@@ -66,9 +70,11 @@ public class ShopService {
         return shopToEdit;
     }
 
-    public Shop deleteShop(Long shopId) {
+    public Shop deleteShop(Long shopId, User user) {
         Shop shop = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
-        System.out.println(shop.getShopId());
+        if (!shop.getUser().equals(user)){
+            throw new UserNotAuthorizedForActionException();
+        }
         shopRepository.delete(shop);
         return shop;
     }

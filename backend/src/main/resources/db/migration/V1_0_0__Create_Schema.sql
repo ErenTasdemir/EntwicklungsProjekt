@@ -50,3 +50,4 @@ create table openstreetmap_location (
     latitude double not null,
     longitude double not null
 );
+

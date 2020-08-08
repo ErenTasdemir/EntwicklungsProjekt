@@ -1,6 +1,7 @@
 package com.github.entwicklungsprojekt.shop.service;
 
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
+import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapLocationService;
 import com.github.entwicklungsprojekt.shop.persistence.Shop;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
 import com.github.entwicklungsprojekt.shop.projection.ShopProjection;
@@ -15,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -37,6 +39,9 @@ public class ShopServiceTest {
 
     @Mock
     private OpenstreetmapConnectionService openstreetmapConnectionServiceMock;
+
+    @Mock
+    private OpenstreetmapLocationService openstreetmapLocationServiceMock;
 
     @InjectMocks
     private ShopService shopService;
@@ -104,6 +109,7 @@ public class ShopServiceTest {
         String expectedShopName = "name";
         String expectedShopType = "type";
         String expectedShopLocation = "location";
+        given(openstreetmapLocationServiceMock.isRealLocation(expectedShopLocation)).willReturn(true);
 
         //when
         Shop actualShop = shopService.addShop(expectedShopName, expectedShopLocation, expectedShopType, userMock);
@@ -127,11 +133,12 @@ public class ShopServiceTest {
         expectedShop.setShopName(expectedShopName);
         expectedShop.setShopLocation(expectedShopLocation);
         expectedShop.setShopType(expectedShopType);
+        expectedShop.setUser(userMock);
 
-        given(shopRepositoryMock.getOne(expectedId)).willReturn(expectedShop);
+        given(shopRepositoryMock.findById(expectedId)).willReturn(Optional.of(expectedShop));
 
         //when
-        Shop actualShop = shopService.editShop(expectedId, expectedShopName, expectedShopLocation, expectedShopType);
+        Shop actualShop = shopService.editShop(expectedId, expectedShopName, expectedShopLocation, expectedShopType, userMock);
 
         //then
         verify(shopRepositoryMock).save(expectedShop);
@@ -144,14 +151,25 @@ public class ShopServiceTest {
     @Test
     public void deleteShopShouldReturnDeletedShop() {
         //given
-        Long shopId = 1L;
-        given(shopRepositoryMock.getOne(shopId)).willReturn(shopMock);
+        //given
+        String expectedShopName = "name";
+        String expectedShopType = "type";
+        String expectedShopLocation = "location";
+        Long expectedId = 1L;
+        Shop expectedShop = new Shop();
+        expectedShop.setShopName(expectedShopName);
+        expectedShop.setShopLocation(expectedShopLocation);
+        expectedShop.setShopType(expectedShopType);
+        expectedShop.setUser(userMock);
+
+        given(shopRepositoryMock.findById(expectedId)).willReturn(Optional.of(expectedShop));
+
 
         //when
-        Shop actualShop = shopService.deleteShop(shopId);
+        Shop actualShop = shopService.deleteShop(expectedId, userMock);
 
         //then
-        assertThat(actualShop).isEqualTo(shopMock);
+        assertThat(actualShop).isEqualTo(expectedShop);
     }
 
 }

@@ -68,8 +68,9 @@ public class ShopController {
     }
 
     @PostMapping(path = "/{id}/edit")
-    ResponseEntity<?> editShop(@PathVariable(name = "id")String id, @RequestBody ShopPayload shopPayload) {
-        var shop = shopService.editShop(Long.parseLong(id), shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType());
+    ResponseEntity<?> editShop(@PathVariable(name = "id")String id, @RequestBody ShopPayload shopPayload, Principal principal) {
+        var user = userService.findByUsername(principal.getName());
+        var shop = shopService.editShop(Long.parseLong(id), shopPayload.getShopName(), shopPayload.getShopLocation(), shopPayload.getShopType(), user);
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);
@@ -77,8 +78,9 @@ public class ShopController {
 
     @Transactional
     @DeleteMapping(path = "/{id}/delete")
-    ResponseEntity<?> deleteShop(@PathVariable(name = "id")String id) {
-        var shop = shopService.deleteShop(Long.parseLong(id));
+    ResponseEntity<?> deleteShop(@PathVariable(name = "id")String id, Principal principal) {
+        var user = userService.findByUsername(principal.getName());
+        var shop = shopService.deleteShop(Long.parseLong(id), user);
         var projection = projectionFactory.createProjection(ShopProjection.class, shop);
 
         return ResponseEntity.ok(projection);
