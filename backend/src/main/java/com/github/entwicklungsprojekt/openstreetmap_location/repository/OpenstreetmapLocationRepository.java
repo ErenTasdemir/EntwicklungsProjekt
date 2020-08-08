@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * {@link JpaRepository} for persisting {@link OpenstreetmapLocation}s.
+ */
 @Repository
 public interface OpenstreetmapLocationRepository extends JpaRepository<OpenstreetmapLocation, Long> {
 

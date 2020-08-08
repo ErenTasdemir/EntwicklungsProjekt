@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * {@link JpaRepository} for persisting {@link Shop}s.
+ */
 @Repository
 public interface ShopRepository extends JpaRepository<Shop, Long> {
 

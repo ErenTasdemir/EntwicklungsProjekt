@@ -1,6 +1,5 @@
 package com.github.entwicklungsprojekt.openstreetmap_location.service;
 
-import com.github.entwicklungsprojekt.exceptions.NotARealLocationException;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.GeoData;
 import com.github.entwicklungsprojekt.openstreetmap_location.persistence.OpenstreetmapLocation;
 import com.github.entwicklungsprojekt.openstreetmap_location.repository.OpenstreetmapLocationRepository;
@@ -20,6 +19,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A Service Class containing methods to manage {@link OpenstreetmapLocation}s.
+ */
 @Slf4j
 @Service
 @Transactional
@@ -31,6 +33,13 @@ public class OpenstreetmapLocationService {
     private final OpenstreetmapLocationRepository openstreetmapLocationRepository;
 
 
+    /**
+     * Instantiates a new Openstreetmap location service.
+     *
+     * @param defaultCsvPath                  the default csv path
+     * @param openstreetmapLocationRepository the openstreetmap location repository
+     * @throws IOException the io exception
+     */
     public OpenstreetmapLocationService(@Value("${staedte_osm.path}")String defaultCsvPath, OpenstreetmapLocationRepository openstreetmapLocationRepository) throws IOException {
         this.defaultCsvPath = defaultCsvPath;
         this.openstreetmapLocationRepository = openstreetmapLocationRepository;
@@ -38,6 +47,10 @@ public class OpenstreetmapLocationService {
         readStaedteOsmIntoMemory();
     }
 
+    /**
+     * Reads a list of city names into memory.
+     * @throws IOException
+     */
     private void readStaedteOsmIntoMemory() throws IOException {
         String filePath = new File(defaultCsvPath).getAbsolutePath();
         Reader in = new FileReader(filePath);
@@ -51,28 +64,65 @@ public class OpenstreetmapLocationService {
         log.info("Succesfully added location names to memory");
     }
 
+
+    /**
+     * Gets one by location name.
+     *
+     * @param locationName the location name
+     * @return the one by location name
+     */
     public OpenstreetmapLocation getOneByLocationName(String locationName) {
         return openstreetmapLocationRepository.findByName(locationName);
     }
 
+    /**
+     * Exists by name boolean.
+     *
+     * @param locationName the location name
+     * @return the boolean
+     */
     public boolean existsByName(String locationName) {
         return openstreetmapLocationRepository.existsByName(locationName);
     }
 
+    /**
+     * Save location.
+     *
+     * @param openstreetmapLocation the openstreetmap location
+     */
     public void saveLocation(OpenstreetmapLocation openstreetmapLocation) {
         openstreetmapLocationRepository.save(openstreetmapLocation);
     }
 
+    /**
+     * Gets shop ids in radius.
+     *
+     * @param geoData the geo data
+     * @param radius  the radius
+     * @return the shop ids in radius
+     */
     public List<Long> getShopIdsInRadius(GeoData geoData , int radius) {
         return openstreetmapLocationRepository.findAllByRadius(geoData.getLatitude() , geoData.getLongitude() , radius);
     }
 
+    /**
+     * Match shop location with osm location csv list.
+     *
+     * @param shopLocation the shop location
+     * @return the list
+     */
     public List<String> matchShopLocationWithOsmLocationCsv(String shopLocation) {
         List<String> matchedCityNames = new ArrayList<>();
         this.loadedLocations.forEach(cityName -> updateProjectLocationsListIfMatches(shopLocation, matchedCityNames, cityName));
         return matchedCityNames;
     }
 
+    /**
+     * Is real location boolean.
+     *
+     * @param location the location
+     * @return the boolean
+     */
     public boolean isRealLocation(String location) {
         List<String> extractedLocations = matchShopLocationWithOsmLocationCsv(location);
         if (extractedLocations.isEmpty()){
@@ -102,6 +152,7 @@ public class OpenstreetmapLocationService {
     }
 
     private class AddOrReplaceDecision {
+
         boolean shouldPutIntoList;
         boolean shouldReplaceAnEntry;
 

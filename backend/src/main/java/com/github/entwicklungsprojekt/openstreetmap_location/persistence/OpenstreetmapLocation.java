@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Entity to persist OpenstreetmapLocation data.
+ *
+ * @see OpenstreetmapLocation
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
