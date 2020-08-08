@@ -25,7 +25,13 @@ public class OpenstreetmapLocation {
     private GeoData geoData;
 
 
-    @ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "shop_location",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "shop_id")
+    )
     private Set<Shop> shops;
 
     public void addShop(Shop shop) {
