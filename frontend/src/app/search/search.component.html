@@ -1,6 +1,6 @@
 <div class="site-content">
   <div class="search-box offset-3 col-6">
-    <div class="search-box-content">
+    <div class="search-box-content" (keyup.enter)="sendSearchRequest(query, location, radiusInput)">
       <input placeholder="Suche" class="form-control" type="text" #query id="query" >
       <div class="row">
         <div class="col-sm-4">
@@ -8,6 +8,7 @@
         </div>
         <div class="col-sm-5">
           <mat-slider
+            [disabled]="location.value===''"
             [(ngModel)]="radiusInput"
             thumbLabel
             [displayWith]="formatLabel"
