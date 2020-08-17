@@ -29,5 +29,5 @@ public interface OpenstreetmapLocationRepository extends JpaRepository<Openstree
             "HAVING distance <= :radius " +
             "ORDER BY distance ASC) " +
             "AS results_with_distance;" , nativeQuery = true)
-    List<Long> findAllByRadius(@Param("latitude") Double latitude , @Param("longitude") Double lng , @Param("radius") int radius);
+    List<Long> findAllByRadius(@Param("latitude") Double latitude , @Param("longitude") Double longitude , @Param("radius") int radius);
 }
