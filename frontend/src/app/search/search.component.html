@@ -8,6 +8,7 @@
         </div>
         <div class="col-sm-5">
           <mat-slider
+            [disabled]="location.value===''"
             [(ngModel)]="radiusInput"
             thumbLabel
             [displayWith]="formatLabel"
