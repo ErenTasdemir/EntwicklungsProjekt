@@ -81,7 +81,7 @@ table thead th{
 th {
   position: sticky !important;
   top: 0 !important;
-  background: rgba(255, 255, 255, 0.42);
+  background: #f3efef;
 }
 thead {
   border: 2px solid slategray;

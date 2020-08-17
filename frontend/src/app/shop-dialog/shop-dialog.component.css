@@ -1,6 +1,6 @@
-mat-dialog-content {
-  max-width: 100%;
-  min-width: 75vh;
+::ng-deep mat-dialog-content {
+  max-width: 40vw;
+  min-width: 30vw;
 }
 ::ng-deep mat-dialog-container {
   background-color: rgb(112, 128, 144) !important;
@@ -33,9 +33,15 @@ p {
 }
 input {
   margin: 0.1em;
+  border: none;
+  padding-left: 0.5em;
 }
 select {
   margin: 0.1em;
+  padding-left: 0.2em;
 }
-
+.attribute {
+  margin-left: 1.5em;
+  transform: translateX(2em);
+}
 

@@ -1,6 +1,6 @@
-mat-dialog-content {
-  max-width: 100%;
-  min-width: 75vh;
+::ng-deep mat-dialog-content {
+  max-width: 40vw;
+  min-width: 30vw;
 
 }
 ::ng-deep mat-dialog-container {
@@ -8,6 +8,7 @@ mat-dialog-content {
 }
 .details-container {
   float: right;
+  font-size: 17px;
 }
 
 h4 {
@@ -32,3 +33,7 @@ p {
   font-size: 17px;
 }
 
+.attribute {
+  margin-left: 1.5em;
+  transform: translateX(2em);
+}

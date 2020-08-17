@@ -8,28 +8,26 @@
       </div>
 
       <div class="row">
-        <div class="col-7 details-container">
+        <div class="col-10 details-container">
           <div class="row text-capitalize">
-            <h4 class="col-4">Name:</h4>
-            <input class="text-capitalize" type="text" name="shopName" ngModel required>
+            <h4 class="col-2">Name:</h4>
+            <input class="text-capitalize attribute offset-2 col-6" type="text" name="shopName" ngModel required>
           </div>
           <div class="row">
-            <h4 class="col-4">Branche:</h4>
-            <select  class="text-capitalize" name="shopType" ngModel required>
+            <h4 class="col-2">Branche:</h4>
+            <select  class="text-capitalize attribute offset-2 col-6" name="shopType" ngModel required>
               <option  value="Branche" selected disabled hidden></option>
               <option *ngFor="let option of options" value="{{option}}" >{{shopService.replaceInUmlaute(option)}}</option>
             </select>
           </div>
           <div class="row">
-            <h4 class="col-4">Ort:</h4>
-            <input id="location-input" class="text-capitalize" type="text" name="shopLocation" ngModel required>
+            <h4 class="col-2">Ort:</h4>
+            <input id="location-input" class="text-capitalize attribute offset-2 col-6" type="text" name="shopLocation" ngModel required>
           </div>
         </div>
       </div>
       <div class="row buttons-container">
         <div>
-          <!--        <div class="input-group mb-3">-->
-<!--          <button class="btn btn-group btn-info"  type="submit" (click)="onSave(shopName, shopType, shopLocation)">Speichern</button>-->
           <button [disabled]="addForm.invalid" class="btn btn-group btn-info general-buttons"  type="submit">Speichern</button>
           <button  class="btn btn-group btn-info general-buttons" type="button" (click)="this.dialogRef.close()">Abbrechen</button>
         </div>
