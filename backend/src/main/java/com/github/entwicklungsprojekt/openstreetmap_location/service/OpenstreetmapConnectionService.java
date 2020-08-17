@@ -60,8 +60,8 @@ public class OpenstreetmapConnectionService {
      */
     public void setLatitudeAndLongitudeForGivenShop(Shop shop) {
         if (shop.getLocations() == null || shop.getLocations().isEmpty()){
-            List<String> projectLocationNames = openstreetmapLocationService.matchShopLocationWithOsmLocationCsv(shop.getShopLocation());
-            for (String location : projectLocationNames) {
+            List<String> ShopLocationNames = openstreetmapLocationService.matchShopLocationWithOsmLocationCsv(shop.getShopLocation());
+            for (String location : ShopLocationNames) {
                 OpenstreetmapLocation openstreetmapLocation;
                 if (!openstreetmapLocationService.existsByName(location)) {
                     openstreetmapLocation = new OpenstreetmapLocation();
