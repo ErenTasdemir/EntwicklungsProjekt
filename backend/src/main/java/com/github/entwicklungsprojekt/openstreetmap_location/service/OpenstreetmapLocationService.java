@@ -113,7 +113,7 @@ public class OpenstreetmapLocationService {
      */
     public List<String> matchShopLocationWithOsmLocationCsv(String shopLocation) {
         List<String> matchedCityNames = new ArrayList<>();
-        this.loadedLocations.forEach(cityName -> updateProjectLocationsListIfMatches(shopLocation, matchedCityNames, cityName));
+        this.loadedLocations.forEach(cityName -> updateShopLocationsListIfMatches(shopLocation, matchedCityNames, cityName));
         return matchedCityNames;
     }
 
@@ -131,7 +131,7 @@ public class OpenstreetmapLocationService {
         return true;
     }
 
-    private void updateProjectLocationsListIfMatches(String shopLocation, List<String> matchedCityNames, String cityName) {
+    private void updateShopLocationsListIfMatches(String shopLocation, List<String> matchedCityNames, String cityName) {
         if (containsExactly(shopLocation, cityName)) {
             if (matchedCityNames.isEmpty()) {
                 matchedCityNames.add(cityName.toLowerCase());

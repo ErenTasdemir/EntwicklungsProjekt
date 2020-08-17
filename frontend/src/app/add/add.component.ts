@@ -10,7 +10,6 @@ export class ShopData implements Shop{
   shopType: string;
   shopLocation: string;
   shopId: string;
-  shopImage ?: any;
 }
 @Component({
   selector: 'app-add',
@@ -21,7 +20,6 @@ export class AddComponent implements OnInit, OnDestroy {
   @Output() shopAdded = new EventEmitter<ShopData>();
 
   shop = new ShopData();
-  image: any;
   error: string;
 
   options = [

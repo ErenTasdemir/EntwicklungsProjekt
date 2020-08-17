@@ -39,10 +39,6 @@ export class ShopService {
     return this.http.get<Shop>(`http://localhost:8081/shops/${shopId}`);
   }
 
-  saveImageToShop(shopId: string, image: FormData): Observable<Shop> {
-    return this.http.post<Shop>(`http://localhost:8081/shops/${shopId}/upload`, image);
-  }
-
   deleteShop(shopId: string): Observable<Shop>{
     return this.http.delete<Shop>(`http://localhost:8081/shops/${shopId}/delete`);
   }
@@ -80,5 +76,4 @@ export interface Shop {
   shopLocation: string;
   shopName: string;
   shopType: string;
-
 }

@@ -42,11 +42,11 @@ public class RadiusSearchService {
      * @return the shop ids within radius
      */
     public List<Long> getShopIdsWithinRadius(String location , int radius) {
-        List<Long> allProjectIdsInRadius;
+        List<Long> allShopIdsInRadius;
 
         if (radius == 0) {
-            allProjectIdsInRadius = new ArrayList<>();
-            shopRepository.findAllByShopLocationContains(location).forEach(shop -> allProjectIdsInRadius.add(shop.getShopId()));
+            allShopIdsInRadius = new ArrayList<>();
+            shopRepository.findAllByShopLocationContains(location).forEach(shop -> allShopIdsInRadius.add(shop.getShopId()));
         } else {
             GeoData geoData = new GeoData();
             if (openstreetmaplocationservice.existsByName(location)) {
@@ -61,10 +61,10 @@ public class RadiusSearchService {
                 openStreetMapLocation.setName(location);
                 openstreetmaplocationservice.saveLocation(openStreetMapLocation);
             }
-            allProjectIdsInRadius = openstreetmaplocationservice.getShopIdsInRadius(geoData , radius);
+            allShopIdsInRadius = openstreetmaplocationservice.getShopIdsInRadius(geoData , radius);
         }
 
-        return allProjectIdsInRadius;
+        return allShopIdsInRadius;
     }
 
 }
