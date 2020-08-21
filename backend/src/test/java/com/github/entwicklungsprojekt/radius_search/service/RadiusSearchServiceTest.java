@@ -49,7 +49,7 @@ public class RadiusSearchServiceTest {
         List<Shop> expectedShops = new ArrayList<>();
         expectedShops.add(shopMock);
 
-        given(shopRepositoryMock.findAllByShopLocationContains(expectedLocation)).willReturn(expectedShops);
+        given(shopRepositoryMock.findAllByShopLocationIgnoreCaseContaining(expectedLocation)).willReturn(expectedShops);
         given(expectedShop.getShopId()).willReturn(expectedShopId);
 
         //when

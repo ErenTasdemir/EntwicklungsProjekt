@@ -5,6 +5,7 @@ import com.github.entwicklungsprojekt.openstreetmap_location.persistence.Openstr
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapConnectionService;
 import com.github.entwicklungsprojekt.openstreetmap_location.service.OpenstreetmapLocationService;
 import com.github.entwicklungsprojekt.shop.persistence.ShopRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +17,11 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class RadiusSearchService {
     private final OpenstreetmapConnectionService openstreetmapConnectionService;
     private final ShopRepository shopRepository;
     private final OpenstreetmapLocationService openstreetmaplocationservice;
-
-    /**
-     * Instantiates a new Radius search service.
-     *
-     * @param openstreetmapConnectionService the openstreetmap connection service
-     * @param shopRepository                 the shop repository
-     * @param openstreetmaplocationservice   the openstreetmaplocationservice
-     */
-    public RadiusSearchService(OpenstreetmapConnectionService openstreetmapConnectionService, ShopRepository shopRepository, OpenstreetmapLocationService openstreetmaplocationservice) {
-        this.openstreetmapConnectionService = openstreetmapConnectionService;
-        this.shopRepository = shopRepository;
-        this.openstreetmaplocationservice = openstreetmaplocationservice;
-    }
 
     /**
      * Gets shop ids within radius.
@@ -46,7 +35,7 @@ public class RadiusSearchService {
 
         if (radius == 0) {
             allShopIdsInRadius = new ArrayList<>();
-            shopRepository.findAllByShopLocationContains(location).forEach(shop -> allShopIdsInRadius.add(shop.getShopId()));
+            shopRepository.findAllByShopLocationIgnoreCaseContaining(location).forEach(shop -> allShopIdsInRadius.add(shop.getShopId()));
         } else {
             GeoData geoData = new GeoData();
             if (openstreetmaplocationservice.existsByName(location)) {
