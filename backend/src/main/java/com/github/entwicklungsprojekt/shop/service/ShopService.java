@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -103,6 +103,7 @@ public class ShopService {
         shopToEdit.setShopName(newName);
         shopToEdit.setShopType(newType);
         shopToEdit.setShopLocation(newLocation);
+        shopToEdit.setLocations(Collections.emptySet());
         shopRepository.save(shopToEdit);
         openstreetmapConnectionService.setLatitudeAndLongitudeForGivenShop(shopToEdit);
 
