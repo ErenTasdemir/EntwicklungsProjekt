@@ -21,9 +21,6 @@ const appRoutingModule: Routes = [
       userShops: UserShopsResolverService
     }
   },
-  { path: 'add-shop',
-    component: AddComponent
-  },
   { path: 'auth',
     component: AuthComponent
   },
